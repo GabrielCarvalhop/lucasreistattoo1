@@ -227,15 +227,13 @@
         <div style="width:26px;height:1px;background:var(--off-white);"></div>
       </button>
     </sc-if>
-    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ toggleMobileMenu }}" aria-label="Fechar" style="background:none;border:none;padding:8px;color:var(--off-white);font-size:22px;line-height:1;cursor:pointer;">×</button>
-    </sc-if>
   </sc-if>
 </header>
 
 <!-- MOBILE FULLSCREEN MENU -->
 <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;background:var(--bg);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;">
+    <button onClick="{{ toggleMobileMenu }}" aria-label="Fechar" style="position:fixed;top:16px;right:20px;background:none;border:none;padding:8px;color:var(--off-white);font-size:28px;line-height:1;cursor:pointer;z-index:401;">×</button>
     <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
       <a href="{{ link.href }}" onClick="{{ closeMenu }}" style="font-family:var(--font-logo);font-size:clamp(26px,7.5vw,34px);letter-spacing:0.02em;color:#fff;">{{ link.label }}</a>
     </sc-for>

@@ -33,6 +33,7 @@
     --font-sans: 'Manrope', sans-serif;
     --font-display: 'UnifrakturCook', cursive;
     --font-logo: 'Nature Beauty', serif;
+    --font-mobile-menu: 'Cormorant Garamond', serif;
   }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--bg); color: var(--off-white); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
@@ -121,7 +122,7 @@
   .mobile-menu-close { position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--off-white); font-size: 22px; line-height: 1; cursor: pointer; z-index: 501; transition: background .25s ease, transform .25s ease; }
   .mobile-menu-close:hover { background: rgba(255,255,255,0.14); transform: scale(1.06); }
   .mobile-menu-links { display: flex; flex-direction: column; width: 100%; max-width: 360px; border-top: 1px solid rgba(238,234,226,0.14); }
-  .mobile-menu-link { display: flex; align-items: baseline; justify-content: center; gap: 16px; font-family: var(--font-logo); font-size: clamp(19px,5.6vw,25px); letter-spacing: 0.02em; color: #fff; padding: clamp(14px,3.4vw,18px) 0; border-bottom: 1px solid rgba(238,234,226,0.14); opacity: 0; transform: translateY(14px); transition: color .25s ease, letter-spacing .25s ease, opacity .4s ease, transform .4s ease; }
+  .mobile-menu-link { display: flex; align-items: baseline; justify-content: center; gap: 16px; font-family: var(--font-mobile-menu); font-size: clamp(19px,5.6vw,25px); letter-spacing: 0.02em; color: #fff; padding: clamp(14px,3.4vw,18px) 0; border-bottom: 1px solid rgba(238,234,226,0.14); opacity: 0; transform: translateY(14px); transition: color .25s ease, letter-spacing .25s ease, opacity .4s ease, transform .4s ease; }
   .mobile-menu-link:active, .mobile-menu-link:hover { color: var(--accent); letter-spacing: 0.05em; }
   body.menu-open .mobile-menu-link { opacity: 1; transform: translateY(0); }
   body.menu-open .mobile-menu-links > a:nth-child(1) { transition-delay: .08s; }
@@ -629,8 +630,7 @@ class Component extends DCLogic {
   works = [
     { num: '01', category: 'Realismo', year: '2026', col: '1 / 6', row: '1 / 9', placeholder: 'TATTOO COMPLETA — BRAÇO\nLEÃO', img: './img/work-realismo-leao-cruzes.jpg' },
     { num: '02', category: 'Fine Line', year: '2026', col: '6 / 9', row: '1 / 5', placeholder: 'DETALHE — FINE LINE', img: './img/work-fineline-botanico.jpg' },
-    { num: '03', category: 'Realismo', year: '2025', col: '9 / 13', row: '1 / 9', placeholder: 'TATTOO COMPLETA — PERNA\nREALISMO', img: './img/work-realismo-tigre.jpg' },
-    { num: '04', category: 'Projeto Autoral', year: '2026', col: '6 / 9', row: '5 / 9', placeholder: 'TATTOO COMPLETA — COSTAS\nPROJETO AUTORAL', img: './img/work-autoral-rickmorty.png' }
+    { num: '03', category: 'Realismo', year: '2025', col: '9 / 13', row: '1 / 9', placeholder: 'TATTOO COMPLETA — PERNA\nREALISMO', img: './img/work-realismo-tigre.jpg' }
   ];
 
   mobileWorks = [

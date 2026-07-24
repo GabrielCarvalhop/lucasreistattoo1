@@ -195,25 +195,26 @@
   .location-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px,3vw,40px); align-items: center; }
   @media (max-width: 899px) { .location-grid { grid-template-columns: 1fr; } }
 
-  .wa-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: clamp(14px,1.8vw,18px); }
   .btn-lg { padding: 18px 38px; font-size: 14px; }
   @media (max-width: 899px) {
-    .wa-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 6px; }
-    .wa-card { flex-shrink: 0; width: min(280px,82vw); scroll-snap-align: start; }
     .btn { font-size: 12.5px; }
     .btn-solid { padding: 15px 24px; }
     .btn-lg { padding: 15px 20px; font-size: 12px; }
   }
-  .wa-card { background: #101010; border: 1px solid rgba(11,11,11,0.9); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 14px 34px rgba(11,11,11,0.16), 0 0 22px 2px rgba(190,190,200,0.10); transition: box-shadow .4s ease; }
-  .wa-card:hover { box-shadow: 0 14px 34px rgba(11,11,11,0.2), 0 0 34px 6px rgba(200,200,215,0.2); }
-  .wa-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #161616; border-bottom: 1px solid rgba(238,234,226,0.07); }
-  .wa-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--off-white); display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 12px; font-weight: 700; flex-shrink: 0; }
-  .wa-name { font-family: var(--font-sans); font-size: 13px; font-weight: 700; color: var(--off-white); line-height: 1.2; }
-  .wa-tag { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; }
-  .wa-body { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
-  .wa-bubble { background: #1D1D1D; border-radius: 3px 12px 12px 12px; padding: 10px 12px 8px; max-width: 95%; }
-  .wa-msg { font-family: var(--font-sans); font-size: 12.5px; line-height: 1.55; color: #D9D4CC; }
-  .wa-time { font-family: var(--font-sans); font-size: 9px; color: var(--text-tertiary); text-align: right; margin-top: 4px; letter-spacing: 0.04em; }
+
+  .depo-marquee-wrap { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); }
+  .depo-marquee-track { display: flex; gap: 20px; width: max-content; animation: depoScroll 60s linear infinite; }
+  .depo-marquee-wrap:hover .depo-marquee-track { animation-play-state: paused; }
+  .depo-item { height: 420px; width: auto; border-radius: var(--radius-lg); flex-shrink: 0; cursor: pointer; box-shadow: 0 14px 34px rgba(11,11,11,0.16), 0 0 22px 2px rgba(190,190,200,0.10); transition: box-shadow .35s ease, transform .35s ease; }
+  .depo-item:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(11,11,11,0.22), 0 0 30px 4px rgba(200,200,215,0.18); }
+  @keyframes depoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 899px) {
+    .depo-item { height: 300px; }
+    .depo-marquee-track { animation-duration: 40s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .depo-marquee-track { animation: none; }
+  }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"></link>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"></link>
@@ -490,29 +491,20 @@
 </section>
 
 <!-- DEPOIMENTOS -->
-<section id="depoimentos" class="section-tight" style="background:var(--off-white);">
-  <div class="eyebrow-block eyebrow-block--center">
+<section id="depoimentos" class="section-tight" style="background:var(--off-white);padding-left:0;padding-right:0;">
+  <div class="eyebrow-block eyebrow-block--center" style="padding:0 clamp(20px,6vw,80px);">
     <div class="eyebrow">DEPOIMENTOS — DIRETO DO WHATSAPP</div>
     <h2 class="h2 h2--light">Quem já<br/>tatuou comigo.</h2>
   </div>
-  <div class="wa-grid">
-    <sc-for list="{{ testimonialCards }}" as="t" hint-placeholder-count="4">
-      <div class="wa-card">
-        <div class="wa-head">
-          <div class="wa-avatar">{{ t.initial }}</div>
-          <div>
-            <div class="wa-name">{{ t.name }}</div>
-            <div class="wa-tag">{{ t.tag }}</div>
-          </div>
-        </div>
-        <div class="wa-body">
-          <div class="wa-bubble">
-            <div class="wa-msg">{{ t.quote }}</div>
-            <div class="wa-time">{{ t.time }}</div>
-          </div>
-        </div>
-      </div>
-    </sc-for>
+  <div class="depo-marquee-wrap">
+    <div class="depo-marquee-track">
+      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
+        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
+      </sc-for>
+      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
+        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
+      </sc-for>
+    </div>
   </div>
 </section>
 
@@ -658,7 +650,7 @@ class Component extends DCLogic {
     { work: 'WORK 01', placeholder: 'PREPARAÇÃO DO MATERIAL', caption: 'PROCESSO / 2026', img: './img/gallery-preparacao-material.jpg' },
     { work: 'WORK 02', placeholder: 'TATTOO — BRAÇO', caption: 'REALISMO / 2026', img: './img/gallery-retrato-realismo.jpg' },
     { work: 'WORK 03', placeholder: 'MACRO DA TATTOO', caption: 'DETALHE / 2026', img: './img/gallery-macro-agulha.jpg' },
-    { work: 'WORK 04', placeholder: 'APLICAÇÃO DO STENCIL', caption: 'PROCESSO / 2026' },
+    { work: 'WORK 04', placeholder: 'APLICAÇÃO DO STENCIL', caption: 'REALISMO / 2026', img: './img/gallery-realismo-mascara.jpg' },
     { work: 'WORK 05', placeholder: 'TATTOO — FINE LINE', caption: 'REALISMO / 2026', img: './img/ig-leao-processo.jpg' },
     { work: 'WORK 06', placeholder: 'TATTOO — COSTAS COMPLETA', caption: 'PROJETO AUTORAL / 2026', img: './img/gallery-zeus-peito.jpg' }
   ];
@@ -672,16 +664,20 @@ class Component extends DCLogic {
 
   confiancaItems = ['MATERIAIS DESCARTÁVEIS', 'ATENDIMENTO INDIVIDUAL', 'AMBIENTE PREPARADO', 'ORIENTAÇÕES PÓS-TATTOO'];
 
-  testimonialsData = [
-    { quote: 'O Lucas conseguiu transformar exatamente a ideia que eu tinha em algo muito melhor.', name: 'Mariana', tag: 'Cliente · Fine Line', time: '14:32' },
-    { quote: 'Processo tranquilo do início ao fim. Me senti seguro e o resultado ficou impecável.', name: 'Rafael', tag: 'Cliente · Realismo', time: '09:18' },
-    { quote: 'Cada detalhe foi pensado. Não parece um estúdio, parece um ateliê.', name: 'Carolina', tag: 'Cliente · Blackwork', time: '17:05' },
-    { quote: 'Levei uma referência solta e o Lucas transformou em um projeto totalmente autoral.', name: 'Pedro', tag: 'Cliente · Projeto autoral', time: '11:47' }
+  depoimentosData = [
+    './img/depoimentos/depoimento-1.png',
+    './img/depoimentos/depoimento-2.png',
+    './img/depoimentos/depoimento-3.png',
+    './img/depoimentos/depoimento-4.png',
+    './img/depoimentos/depoimento-5.png',
+    './img/depoimentos/depoimento-6.png',
+    './img/depoimentos/depoimento-7.png',
+    './img/depoimentos/depoimento-8.png'
   ];
 
   faqsData = [
     { question: 'COMO FUNCIONA O ORÇAMENTO?', answer: 'Você envia sua ideia, tamanho aproximado e região do corpo pelo WhatsApp. Lucas analisa o projeto e retorna com valores, prazo e disponibilidade.' },
-    { question: 'VOCÊ DESENVOLVE DESENHOS EXCLUSIVOS?', answer: 'Sim. Cada projeto é autoral e desenvolvido individualmente — a partir das referências que você traz, transformo a ideia em uma arte única, pensada pra sua anatomia e pro seu estilo.' },
+    { question: 'VOCÊ DESENVOLVE DESENHOS EXCLUSIVOS?', answer: 'Sim. Cada projeto é autoral e desenvolvido individualmente — a partir das referências que você traz, transformo a ideia em uma arte única, pensada para sua anatomia e estilo.' },
     { question: 'PRECISO PAGAR SINAL?', answer: 'Sim, um sinal é necessário para confirmar o agendamento e reservar sua sessão na agenda.' },
     { question: 'POSSO ENVIAR REFERÊNCIAS?', answer: 'Sim. Referências ajudam a entender a ideia, mas o desenho final é sempre desenvolvido de forma autoral.' },
     { question: 'QUANTO TEMPO DURA UMA SESSÃO?', answer: 'Depende do tamanho e complexidade do projeto. Isso é definido durante o orçamento.' }
@@ -832,9 +828,9 @@ class Component extends DCLogic {
     const workImages = this.works.map((w) => w.img).filter(Boolean);
     const works = this.works.map((w) => ({ ...w, hasImg: !!w.img, hasImgNot: !w.img, onOpen: w.img ? () => this.openLightbox(workImages, workImages.indexOf(w.img)) : undefined }));
 
-    const testimonialCards = this.testimonialsData.map((t) => ({
-      ...t,
-      initial: t.name.charAt(0).toUpperCase()
+    const depoimentos = this.depoimentosData.map((img) => ({
+      img,
+      onOpen: () => this.openLightbox(this.depoimentosData, this.depoimentosData.indexOf(img))
     }));
     const mwRaw = this.mobileWorks[this.state.workIndex];
     const mobileWorkImages = this.mobileWorks.map((m) => m.img).filter(Boolean);
@@ -887,7 +883,7 @@ class Component extends DCLogic {
       activeEstiloHasImgNot: !this.estilosImg[this.state.activeEstilo],
       activeEstiloOpen: this.estilosImg[this.state.activeEstilo] ? () => this.openLightbox([this.estilosImg[this.state.activeEstilo]], 0) : undefined,
       confiancaItems: this.confiancaItems,
-      testimonialCards,
+      depoimentos,
       faqs,
       isLightboxOpen: this.state.lightboxImages.length > 0,
       lightboxImg: this.state.lightboxImages[this.state.lightboxIndex],

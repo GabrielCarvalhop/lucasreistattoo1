@@ -116,10 +116,14 @@
     .lightbox-arrow-right { right: 10px; }
   }
 
-  .mobile-menu-overlay { position: fixed; inset: 0; width: 100vw; height: 100dvh; margin: 0; padding: 0; background: #080808; z-index: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(14px,3.5vw,20px); opacity: 0; transform: scale(0.97); visibility: hidden; pointer-events: none; transition: opacity .32s cubic-bezier(0.16,1,0.3,1), transform .32s cubic-bezier(0.16,1,0.3,1), visibility 0s linear .32s; }
+  .mobile-menu-overlay { position: fixed; inset: 0; width: 100vw; height: 100dvh; margin: 0; padding: 0 clamp(20px,7vw,40px); background: rgba(8,8,8,0.82); backdrop-filter: blur(22px) saturate(1.15); -webkit-backdrop-filter: blur(22px) saturate(1.15); z-index: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(20px,5vw,32px); opacity: 0; transform: scale(0.97); visibility: hidden; pointer-events: none; transition: opacity .32s cubic-bezier(0.16,1,0.3,1), transform .32s cubic-bezier(0.16,1,0.3,1), visibility 0s linear .32s; }
   body.menu-open .mobile-menu-overlay { opacity: 1; transform: scale(1); visibility: visible; pointer-events: auto; transition: opacity .32s cubic-bezier(0.16,1,0.3,1), transform .32s cubic-bezier(0.16,1,0.3,1); }
-  .mobile-menu-close { position: absolute; top: 18px; right: 18px; background: none; border: none; padding: 8px; color: var(--off-white); font-size: 26px; line-height: 1; cursor: pointer; z-index: 501; }
-  .mobile-menu-link { font-family: var(--font-logo); font-size: clamp(21px,6vw,28px); letter-spacing: 0.02em; color: #fff; }
+  .mobile-menu-close { position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--off-white); font-size: 22px; line-height: 1; cursor: pointer; z-index: 501; transition: background .25s ease, transform .25s ease; }
+  .mobile-menu-close:hover { background: rgba(255,255,255,0.14); transform: scale(1.06); }
+  .mobile-menu-links { display: flex; flex-direction: column; width: 100%; max-width: 360px; border-top: 1px solid rgba(238,234,226,0.14); }
+  .mobile-menu-link { display: flex; align-items: baseline; justify-content: center; gap: 16px; font-family: var(--font-logo); font-size: clamp(19px,5.6vw,25px); letter-spacing: 0.02em; color: #fff; padding: clamp(14px,3.4vw,18px) 0; border-bottom: 1px solid rgba(238,234,226,0.14); transition: color .25s ease, letter-spacing .25s ease; }
+  .mobile-menu-link:active, .mobile-menu-link:hover { color: var(--accent); letter-spacing: 0.05em; }
+  .mobile-menu-num { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.1em; color: var(--text-secondary); }
   .img-frame > *:first-child { transition: transform .5s ease; }
   .img-frame:hover { box-shadow: 0 0 0 1px rgba(210,210,218,0.16), 0 0 26px 3px rgba(200,200,215,0.22), 0 0 60px 10px rgba(175,175,195,0.14); }
   .img-frame:hover > *:first-child { transform: scale(1.035); }
@@ -246,10 +250,15 @@
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
   <div class="mobile-menu-overlay">
     <button class="mobile-menu-close" onClick="{{ toggleMobileMenu }}" aria-label="Fechar">×</button>
-    <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
-      <a href="{{ link.href }}" onClick="{{ closeMenu }}" class="mobile-menu-link">{{ link.label }}</a>
-    </sc-for>
-    <a href="{{ waLink }}" target="_blank" onClick="{{ closeMenu }}" class="btn btn-solid" style="margin-top:8px;padding:13px 26px;font-size:12px;">SOLICITAR ORÇAMENTO</a>
+    <div class="mobile-menu-links">
+      <sc-for list="{{ mobileNavLinks }}" as="link" hint-placeholder-count="5">
+        <a href="{{ link.href }}" onClick="{{ closeMenu }}" class="mobile-menu-link">
+          <span class="mobile-menu-num">{{ link.num }}</span>
+          <span>{{ link.label }}</span>
+        </a>
+      </sc-for>
+    </div>
+    <a href="{{ waLink }}" target="_blank" onClick="{{ closeMenu }}" class="btn btn-solid" style="margin-top:4px;padding:13px 26px;font-size:12px;">SOLICITAR ORÇAMENTO</a>
   </div>
 </sc-if>
 
@@ -836,6 +845,7 @@ class Component extends DCLogic {
       toggleMobileMenu: this.toggleMobileMenu,
       closeMenu: this.closeMenu,
       navLinks: this.navLinks,
+      mobileNavLinks: this.navLinks.map((l, i) => ({ ...l, num: '0' + (i + 1) })),
       waLink,
       headerStyle: {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,

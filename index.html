@@ -406,7 +406,7 @@
     </div>
     <div class="img-frame img-frame--md" style="position:sticky;top:100px;width:min(340px,100%);aspect-ratio:4/5;margin:0 auto;">
       <sc-if value="{{ activeEstiloHasImg }}" hint-placeholder-val="{{ false }}">
-        <img src="{{ activeEstiloImg }}" alt="{{ activeEstiloName }}" onClick="{{ activeEstiloOpen }}" style="object-position:25% 30%;" />
+        <img src="{{ activeEstiloImg }}" alt="{{ activeEstiloName }}" onClick="{{ activeEstiloOpen }}" style="object-position:42% 38%;" />
       </sc-if>
       <sc-if value="{{ activeEstiloHasImgNot }}" hint-placeholder-val="{{ true }}">
         <div class="placeholder-fill" style="transition:background .4s ease;">TATTOO — {{ activeEstiloName }}</div>
@@ -651,11 +651,11 @@ class Component extends DCLogic {
     { category: 'Projeto Autoral', note: 'Custom project', placeholder: 'TATTOO — OMBRO', img: '' }
   ];
 
-  estilosData = ['Fine Line', 'Blackwork', 'Realismo', 'Projetos Autorais'];
-  estilosImg = ['./img/work-fineline-botanico.jpg', '', './img/gallery-retrato-realismo.jpg', './img/work-autoral-rickmorty.png'];
+  estilosData = ['Fine Line', 'Realismo', 'Projetos Autorais'];
+  estilosImg = ['./img/work-fineline-botanico.jpg', './img/gallery-retrato-realismo.jpg', './img/work-autoral-rickmorty.png'];
 
   galeria = [
-    { work: 'WORK 01', placeholder: 'PREPARAÇÃO DO MATERIAL', caption: 'PROCESSO / 2026' },
+    { work: 'WORK 01', placeholder: 'PREPARAÇÃO DO MATERIAL', caption: 'PROCESSO / 2026', img: './img/gallery-preparacao-material.jpg' },
     { work: 'WORK 02', placeholder: 'TATTOO — BRAÇO', caption: 'REALISMO / 2026', img: './img/gallery-retrato-realismo.jpg' },
     { work: 'WORK 03', placeholder: 'MACRO DA TATTOO', caption: 'DETALHE / 2026', img: './img/gallery-macro-agulha.jpg' },
     { work: 'WORK 04', placeholder: 'APLICAÇÃO DO STENCIL', caption: 'PROCESSO / 2026' },

@@ -1007,6 +1007,8 @@ class Component extends DCLogic {
       if (!w || !h) return;
       renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
     };
     window.addEventListener('resize', resize);
     if (window.ResizeObserver) new ResizeObserver(resize).observe(parent);
@@ -1031,7 +1033,7 @@ class Component extends DCLogic {
         activeCanvas = canvas;
         try {
           initDarkVeil(canvas, {
-            hueShift: 200,
+            hueShift: 160,
             noiseIntensity: 0.04,
             scanlineIntensity: 0.06,
             scanlineFrequency: 2.2,

@@ -302,6 +302,24 @@
   </sc-if>
 </section>
 
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="section-tight" style="background:var(--off-white);padding-left:0;padding-right:0;">
+  <div class="eyebrow-block eyebrow-block--center" style="padding:0 clamp(20px,6vw,80px);">
+    <div class="eyebrow">DEPOIMENTOS — DIRETO DO WHATSAPP</div>
+    <h2 class="h2 h2--light">Quem já<br/>tatuou comigo.</h2>
+  </div>
+  <div class="depo-marquee-wrap">
+    <div class="depo-marquee-track">
+      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
+        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
+      </sc-for>
+      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
+        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
+      </sc-for>
+    </div>
+  </div>
+</section>
+
 <!-- TRABALHOS SELECIONADOS -->
 <section id="trabalhos" class="section" style="background:var(--bg);">
   <div class="eyebrow-block eyebrow-block--center">
@@ -487,24 +505,6 @@
       <div class="eyebrow">ONDE ESTAMOS</div>
       <div style="font-family:var(--font-serif);font-weight:500;font-size:clamp(20px,2.4vw,26px);color:var(--off-white);line-height:1.3;">Av. Sete de Setembro<br/>Matozinhos, São João del Rei — MG</div>
       <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" class="link-underline" style="width:fit-content;">COMO CHEGAR (GOOGLE MAPS) →</a>
-    </div>
-  </div>
-</section>
-
-<!-- DEPOIMENTOS -->
-<section id="depoimentos" class="section-tight" style="background:var(--off-white);padding-left:0;padding-right:0;">
-  <div class="eyebrow-block eyebrow-block--center" style="padding:0 clamp(20px,6vw,80px);">
-    <div class="eyebrow">DEPOIMENTOS — DIRETO DO WHATSAPP</div>
-    <h2 class="h2 h2--light">Quem já<br/>tatuou comigo.</h2>
-  </div>
-  <div class="depo-marquee-wrap">
-    <div class="depo-marquee-track">
-      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
-        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
-      </sc-for>
-      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
-        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
-      </sc-for>
     </div>
   </div>
 </section>

@@ -181,8 +181,10 @@
 
   .gallery-track { display: flex; gap: clamp(16px,2vw,22px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
   .gallery-track::-webkit-scrollbar { display: none; }
-  .gallery-card { flex: 0 0 auto; width: min(320px,72vw); scroll-snap-align: start; }
+  .gallery-card { flex: 0 0 auto; width: min(320px,72vw); scroll-snap-align: start; transition: transform .5s cubic-bezier(0.34,1.56,0.64,1); will-change: transform; }
   .gallery-card .img-frame { width: 100%; aspect-ratio: 4/5; }
+  .gallery-card:hover { transform: scale(1.06) rotate(-1.2deg); z-index: 2; }
+  .gallery-card:nth-child(even):hover { transform: scale(1.06) rotate(1.2deg); }
   .gallery-nav { display: flex; gap: 10px; }
 
   .hero-portrait { aspect-ratio: 4/5; max-height: min(640px,72vh); margin: 0 auto; }
@@ -447,8 +449,8 @@
   </div>
   <div class="gallery-track" ref="{{ galeriaRef }}">
     <sc-for list="{{ galeria }}" as="g" hint-placeholder-count="6">
-      <div class="gallery-card" data-reveal-id="galeria-{{ $index }}" style="{{ g.style }}">
-        <div class="img-frame img-frame--md" onClick="{{ g.onOpen }}">
+      <div class="gallery-card">
+        <div class="img-frame img-frame--md" data-reveal-id="galeria-{{ $index }}" style="{{ g.style }}" onClick="{{ g.onOpen }}">
           <sc-if value="{{ g.hasImg }}" hint-placeholder-val="{{ false }}">
             <img src="{{ g.img }}" alt="{{ g.caption }}" style="object-position:center 20%;" />
           </sc-if>
@@ -617,6 +619,15 @@ class Component extends DCLogic {
       opacity: on ? 1 : 0,
       transform: on ? 'translateY(0)' : 'translateY(16px)',
       transition: 'opacity .5s ease ' + (delayMs || 0) + 'ms, transform .5s ease ' + (delayMs || 0) + 'ms'
+    };
+  }
+
+  revealBounce(id, delayMs) {
+    const on = !!this.state.revealed[id];
+    return {
+      opacity: on ? 1 : 0,
+      transform: on ? 'scale(1)' : 'scale(0.4)',
+      transition: 'opacity .4s ease ' + (delayMs || 0) + 'ms, transform .7s cubic-bezier(0.34,1.56,0.64,1) ' + (delayMs || 0) + 'ms'
     };
   }
 
@@ -815,7 +826,7 @@ class Component extends DCLogic {
       hasImg: !!g.img,
       hasImgNot: !g.img,
       onOpen: g.img ? () => this.openLightbox(galeriaImages, galeriaImages.indexOf(g.img)) : undefined,
-      style: this.reveal('galeria-' + i, (i % 2) * 80)
+      style: this.revealBounce('galeria-' + i, i * 90)
     }));
 
     const processoSteps = this.processoSteps.map((step, i) => ({

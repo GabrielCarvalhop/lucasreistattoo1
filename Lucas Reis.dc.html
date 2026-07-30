@@ -315,7 +315,7 @@
         <a href="{{ waLink }}" target="_blank" class="btn btn-solid" style="width:fit-content;">SOLICITAR ORÇAMENTO ↗</a>
       </div>
       <div class="img-frame hero-portrait">
-        <img src="./img/hero-tattooing.jpg" alt="Lucas Reis tatuando" onClick="{{ heroLightboxOpen }}" style="object-position:center 20%;" />
+        <img src="./img/hero-tattooing.webp" alt="Lucas Reis tatuando" onClick="{{ heroLightboxOpen }}" fetchpriority="high" style="object-position:center 20%;" />
       </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:32px;font-family:var(--font-sans);color:var(--text-secondary);font-size:11px;letter-spacing:0.12em;">
@@ -329,7 +329,7 @@
       <div style="font-family:var(--font-sans);font-size:12px;letter-spacing:0.15em;color:var(--accent);">LUCAS REIS<br/><span style="color:var(--text-secondary);">TATTOO ARTIST</span></div>
       <h1 class="h1-hero" style="margin:0;">Tatuagem<br/>com<br/><em>identidade.</em></h1>
       <div class="img-frame" style="aspect-ratio:4/5;">
-        <img src="./img/hero-tattooing.jpg" alt="Lucas Reis tatuando" onClick="{{ heroLightboxOpen }}" style="object-position:center 25%;" />
+        <img src="./img/hero-tattooing.webp" alt="Lucas Reis tatuando" onClick="{{ heroLightboxOpen }}" fetchpriority="high" style="object-position:center 25%;" />
       </div>
       <p class="body-text" style="font-size:15px;">Projetos autorais e personalizados, pensados para transformar sua ideia em uma tatuagem que realmente tenha a sua cara.</p>
     </div>
@@ -345,10 +345,10 @@
   <div class="depo-marquee-wrap">
     <div class="depo-marquee-track">
       <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
-        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
+        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" loading="lazy" />
       </sc-for>
       <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
-        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" />
+        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" loading="lazy" />
       </sc-for>
     </div>
   </div>
@@ -364,7 +364,7 @@
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
     <div class="works-catalog">
       <div class="img-frame img-frame--md works-catalog-image" style="cursor:none;" onClick="{{ activeWorkOpen }}" onMouseMove="{{ onWorkMouseMove }}" onMouseEnter="{{ onWorkMouseEnter }}" onMouseLeave="{{ onWorkMouseLeave }}">
-        <img src="{{ activeWorkImg }}" alt="{{ activeWorkCategory }}" style="object-position:center 28%;" />
+        <img src="{{ activeWorkImg }}" alt="{{ activeWorkCategory }}" loading="lazy" style="object-position:center 28%;" />
         <div class="caption-pill" style="position:absolute;left:16px;bottom:16px;">
           <span class="meta-tag">{{ activeWorkNum }}</span>
           <span class="meta-tag" style="color:var(--off-white);">{{ activeWorkCategory }}</span>
@@ -390,7 +390,7 @@
     <div onTouchStart="{{ onWorkTouchStart }}" onTouchEnd="{{ onWorkTouchEnd }}">
       <div class="img-frame" style="width:100%;aspect-ratio:4/5;">
         <sc-if value="{{ currentMobileWork.hasImg }}" hint-placeholder-val="{{ false }}">
-          <img src="{{ currentMobileWork.img }}" alt="{{ currentMobileWork.category }}" onClick="{{ currentMobileWork.onOpen }}" style="object-position:center 25%;" />
+          <img src="{{ currentMobileWork.img }}" alt="{{ currentMobileWork.category }}" onClick="{{ currentMobileWork.onOpen }}" loading="lazy" style="object-position:center 25%;" />
         </sc-if>
         <sc-if value="{{ currentMobileWork.hasImgNot }}" hint-placeholder-val="{{ true }}">
           <div class="placeholder-fill">{{ currentMobileWork.placeholder }}</div>
@@ -434,7 +434,7 @@
     <div class="eyebrow">01 — O ARTISTA</div>
   </div>
   <div class="artista-grid">
-    <div data-reveal-id="artista-image" class="img-frame" style="{{ artistaImageStyle }}"><img src="./img/artista-estudio.jpg" alt="Lucas Reis no estúdio" onClick="{{ artistaLightboxOpen }}" style="object-position:center 20%;" /></div>
+    <div data-reveal-id="artista-image" class="img-frame" style="{{ artistaImageStyle }}"><img src="./img/artista-estudio.webp" alt="Lucas Reis no estúdio" onClick="{{ artistaLightboxOpen }}" loading="lazy" style="object-position:center 20%;" /></div>
     <div style="position:relative;display:flex;flex-direction:column;gap:20px;justify-content:center;">
       <div style="position:absolute;top:-30px;right:0;font-family:var(--font-serif);font-size:clamp(110px,15vw,190px);color:rgba(238,234,226,0.045);line-height:1;z-index:0;">01</div>
       <h2 style="position:relative;margin:0;font-family:var(--font-serif);font-weight:500;font-size:clamp(34px,4.6vw,50px);color:var(--off-white);line-height:1.02;">Lucas<br/>Reis.</h2>
@@ -465,7 +465,7 @@
     </div>
     <div class="img-frame img-frame--md" style="position:sticky;top:100px;width:min(340px,100%);aspect-ratio:4/5;margin:0 auto;">
       <sc-if value="{{ activeEstiloHasImg }}" hint-placeholder-val="{{ false }}">
-        <img src="{{ activeEstiloImg }}" alt="{{ activeEstiloName }}" onClick="{{ activeEstiloOpen }}" style="object-position:42% 38%;" />
+        <img src="{{ activeEstiloImg }}" alt="{{ activeEstiloName }}" onClick="{{ activeEstiloOpen }}" loading="lazy" style="object-position:42% 38%;" />
       </sc-if>
       <sc-if value="{{ activeEstiloHasImgNot }}" hint-placeholder-val="{{ true }}">
         <div class="placeholder-fill" style="transition:background .4s ease;">TATTOO — {{ activeEstiloName }}</div>
@@ -488,7 +488,7 @@
       <div class="gallery-card">
         <div class="img-frame img-frame--md" data-reveal-id="galeria-{{ $index }}" style="{{ g.style }}" onClick="{{ g.onOpen }}">
           <sc-if value="{{ g.hasImg }}" hint-placeholder-val="{{ false }}">
-            <img src="{{ g.img }}" alt="{{ g.caption }}" style="object-position:center 20%;" />
+            <img src="{{ g.img }}" alt="{{ g.caption }}" loading="lazy" style="object-position:center 20%;" />
           </sc-if>
           <sc-if value="{{ g.hasImgNot }}" hint-placeholder-val="{{ true }}">
             <div class="placeholder-fill">{{ g.placeholder }}</div>
@@ -526,7 +526,7 @@
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
     <div class="studio-composition">
       <div class="img-frame img-frame--md studio-composition-image">
-        <img src="./img/estudio-ambiente.jpg" alt="Ambiente do estúdio" onClick="{{ estudioLightboxOpen }}" style="object-position:center 40%;" />
+        <img src="./img/estudio-ambiente.webp" alt="Ambiente do estúdio" onClick="{{ estudioLightboxOpen }}" loading="lazy" style="object-position:center 40%;" />
       </div>
       <div style="display:flex;flex-direction:column;justify-content:center;gap:18px;">
         <h2 class="h2">Um espaço preparado<br/>para sua experiência.</h2>
@@ -547,7 +547,7 @@
 
   <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
     <div style="position:relative;width:100%;height:min(400px,48vh);border-radius:var(--radius-lg);overflow:hidden;display:flex;align-items:flex-end;padding:clamp(24px,4vw,44px);">
-      <img src="./img/estudio-ambiente.jpg" alt="Ambiente do estúdio" onClick="{{ estudioLightboxOpen }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;cursor:pointer;" />
+      <img src="./img/estudio-ambiente.webp" alt="Ambiente do estúdio" onClick="{{ estudioLightboxOpen }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;cursor:pointer;" />
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.85),rgba(11,11,11,0) 55%);"></div>
       <h2 class="h2" style="position:relative;max-width:600px;">Um espaço preparado<br/>para sua experiência.</h2>
     </div>
@@ -701,27 +701,27 @@ class Component extends DCLogic {
   ];
 
   works = [
-    { num: '01', category: 'Realismo', year: '2026', col: '1 / 6', row: '1 / 9', placeholder: 'TATTOO COMPLETA — BRAÇO\nLEÃO', img: './img/work-realismo-leao-cruzes.jpg' },
-    { num: '02', category: 'Fine Line', year: '2026', col: '6 / 9', row: '1 / 9', placeholder: 'DETALHE — FINE LINE', img: './img/work-fineline-botanico.jpg' },
-    { num: '03', category: 'Realismo', year: '2025', col: '9 / 13', row: '1 / 9', placeholder: 'TATTOO COMPLETA — PERNA\nREALISMO', img: './img/work-realismo-tigre.jpg' }
+    { num: '01', category: 'Realismo', year: '2026', col: '1 / 6', row: '1 / 9', placeholder: 'TATTOO COMPLETA — BRAÇO\nLEÃO', img: './img/work-realismo-leao-cruzes.webp' },
+    { num: '02', category: 'Fine Line', year: '2026', col: '6 / 9', row: '1 / 9', placeholder: 'DETALHE — FINE LINE', img: './img/work-fineline-botanico.webp' },
+    { num: '03', category: 'Realismo', year: '2025', col: '9 / 13', row: '1 / 9', placeholder: 'TATTOO COMPLETA — PERNA\nREALISMO', img: './img/work-realismo-tigre.webp' }
   ];
 
   mobileWorks = [
-    { category: 'Realismo', note: 'Projeto autoral', placeholder: 'TATTOO — LEÃO', img: './img/work-realismo-leao-cruzes.jpg' },
-    { category: 'Fine Line', note: 'Projeto autoral', placeholder: 'TATTOO — FINE LINE', img: './img/work-fineline-botanico.jpg' },
-    { category: 'Realismo', note: 'Projeto autoral', placeholder: 'TATTOO — PERNA\nREALISMO', img: './img/work-realismo-tigre.jpg' }
+    { category: 'Realismo', note: 'Projeto autoral', placeholder: 'TATTOO — LEÃO', img: './img/work-realismo-leao-cruzes.webp' },
+    { category: 'Fine Line', note: 'Projeto autoral', placeholder: 'TATTOO — FINE LINE', img: './img/work-fineline-botanico.webp' },
+    { category: 'Realismo', note: 'Projeto autoral', placeholder: 'TATTOO — PERNA\nREALISMO', img: './img/work-realismo-tigre.webp' }
   ];
 
   estilosData = ['Fine Line', 'Realismo', 'Projetos Autorais'];
-  estilosImg = ['./img/work-fineline-botanico.jpg', './img/gallery-retrato-realismo.jpg', './img/work-autoral-rickmorty.png'];
+  estilosImg = ['./img/work-fineline-botanico.webp', './img/gallery-retrato-realismo.webp', './img/work-autoral-rickmorty.webp'];
 
   galeria = [
-    { work: 'WORK 01', placeholder: 'PREPARAÇÃO DO MATERIAL', caption: 'PROCESSO / 2026', img: './img/gallery-preparacao-material.jpg' },
-    { work: 'WORK 02', placeholder: 'TATTOO — BRAÇO', caption: 'REALISMO / 2026', img: './img/gallery-retrato-realismo.jpg' },
-    { work: 'WORK 03', placeholder: 'MACRO DA TATTOO', caption: 'DETALHE / 2026', img: './img/gallery-macro-agulha.jpg' },
-    { work: 'WORK 04', placeholder: 'APLICAÇÃO DO STENCIL', caption: 'REALISMO / 2026', img: './img/gallery-realismo-mascara.jpg' },
-    { work: 'WORK 05', placeholder: 'TATTOO — FINE LINE', caption: 'REALISMO / 2026', img: './img/ig-leao-processo.jpg' },
-    { work: 'WORK 06', placeholder: 'TATTOO — COSTAS COMPLETA', caption: 'PROJETO AUTORAL / 2026', img: './img/gallery-zeus-peito.jpg' }
+    { work: 'WORK 01', placeholder: 'PREPARAÇÃO DO MATERIAL', caption: 'PROCESSO / 2026', img: './img/gallery-preparacao-material.webp' },
+    { work: 'WORK 02', placeholder: 'TATTOO — BRAÇO', caption: 'REALISMO / 2026', img: './img/gallery-retrato-realismo.webp' },
+    { work: 'WORK 03', placeholder: 'MACRO DA TATTOO', caption: 'DETALHE / 2026', img: './img/gallery-macro-agulha.webp' },
+    { work: 'WORK 04', placeholder: 'APLICAÇÃO DO STENCIL', caption: 'REALISMO / 2026', img: './img/gallery-realismo-mascara.webp' },
+    { work: 'WORK 05', placeholder: 'TATTOO — FINE LINE', caption: 'REALISMO / 2026', img: './img/ig-leao-processo.webp' },
+    { work: 'WORK 06', placeholder: 'TATTOO — COSTAS COMPLETA', caption: 'PROJETO AUTORAL / 2026', img: './img/gallery-zeus-peito.webp' }
   ];
 
   processoSteps = [
@@ -734,14 +734,14 @@ class Component extends DCLogic {
   confiancaItems = ['MATERIAIS DESCARTÁVEIS', 'ATENDIMENTO INDIVIDUAL', 'AMBIENTE PREPARADO', 'ORIENTAÇÕES PÓS-TATTOO'];
 
   depoimentosData = [
-    './img/depoimentos/depoimento-1.png',
-    './img/depoimentos/depoimento-2.png',
-    './img/depoimentos/depoimento-3.png',
-    './img/depoimentos/depoimento-4.png',
-    './img/depoimentos/depoimento-5.png',
-    './img/depoimentos/depoimento-6.png',
-    './img/depoimentos/depoimento-7.png',
-    './img/depoimentos/depoimento-8.png'
+    './img/depoimentos/depoimento-1.webp',
+    './img/depoimentos/depoimento-2.webp',
+    './img/depoimentos/depoimento-3.webp',
+    './img/depoimentos/depoimento-4.webp',
+    './img/depoimentos/depoimento-5.webp',
+    './img/depoimentos/depoimento-6.webp',
+    './img/depoimentos/depoimento-7.webp',
+    './img/depoimentos/depoimento-8.webp'
   ];
 
   faqsData = [
@@ -996,16 +996,16 @@ class Component extends DCLogic {
       galeriaRef: this.galeriaRef,
       galeriaScrollPrev: this.galeriaScrollPrev,
       galeriaScrollNext: this.galeriaScrollNext,
-      heroLightboxOpen: () => this.openLightbox(['./img/hero-tattooing.jpg'], 0),
-      artistaLightboxOpen: () => this.openLightbox(['./img/artista-estudio.jpg'], 0),
-      estudioLightboxOpen: () => this.openLightbox(['./img/estudio-ambiente.jpg'], 0)
+      heroLightboxOpen: () => this.openLightbox(['./img/hero-tattooing.webp'], 0),
+      artistaLightboxOpen: () => this.openLightbox(['./img/artista-estudio.webp'], 0),
+      estudioLightboxOpen: () => this.openLightbox(['./img/estudio-ambiente.webp'], 0)
     };
   }
 }
 
 </script>
 <script type="module">
-  import { Renderer, Program, Mesh, Triangle, Vec2 } from 'https://unpkg.com/ogl@1.0.11/src/index.js';
+  import { Renderer, Program, Mesh, Triangle, Vec2 } from 'https://esm.sh/ogl@1.0.11';
 
   const vertex = `
     attribute vec2 position;

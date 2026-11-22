@@ -202,12 +202,13 @@
   .works-img[data-active="true"] { opacity: 1; transform: scale(1); }
   .works-side { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-width: 0; }
   .work-rows { display: flex; flex-direction: column; margin-top: clamp(28px, 3.4vw, 48px); border-top: 1px solid var(--hair); }
-  .work-row { appearance: none; position: relative; width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 104px; padding: 22px 4px; color: inherit; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--hair); cursor: pointer; transition: padding-left .5s var(--ease-out); }
+  .work-row { appearance: none; position: relative; width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 104px; padding: 22px 4px; color: inherit; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--hair); cursor: pointer; }
+  .work-row > span { transition: transform .5s var(--ease-out); }
   .work-row::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease-out); }
   .work-row-title { display: block; font-family: var(--font-serif); font-size: clamp(28px, 3vw, 44px); line-height: 1; letter-spacing: -0.01em; color: var(--off-white); transition: color .3s ease; }
   .work-row-meta { display: block; margin-top: 10px; }
-  .work-row-arrow { font-family: var(--font-mono); font-size: 16px; color: var(--text-tertiary); transition: transform .45s var(--ease-out), color .3s ease; }
-  .work-row:hover, .work-row[aria-pressed="true"] { padding-left: 14px; }
+  .work-row > .work-row-arrow { font-family: var(--font-mono); font-size: 16px; color: var(--text-tertiary); transition: transform .45s var(--ease-out), color .3s ease; }
+  .work-row:hover > span:not(.work-row-arrow), .work-row[aria-pressed="true"] > span:not(.work-row-arrow) { transform: translateX(14px); }
   .work-row[aria-pressed="true"]::after { transform: scaleX(1); }
   .work-row[aria-pressed="true"] .work-row-title { color: var(--accent); font-style: italic; }
   .work-row[aria-pressed="true"] .work-row-num { color: var(--accent); }

@@ -159,7 +159,6 @@
   .flourish path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 900; stroke-dashoffset: 900; animation: inkDraw 1.7s cubic-bezier(0.65,0,0.35,1) .7s forwards; }
   @keyframes inkDraw { to { stroke-dashoffset: 0; } }
   @keyframes ruleDraw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  @keyframes ruleDrawY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 
   /* ---------- Hero ---------- */
   .hero { position: relative; isolation: isolate; display: flex; flex-direction: column; min-height: min(100vh, 980px); padding: clamp(96px, 9vw, 128px) var(--edge) 26px; overflow: clip; }
@@ -253,44 +252,54 @@
   /* ---------- Galeria ---------- */
   .gallery-tools { display: flex; align-items: center; gap: 18px; }
   .gallery-nav { display: flex; gap: 10px; }
-  .gallery-track { display: flex; flex-direction: column; gap: 8px; width: 100%; height: min(620px,78dvh); overflow: hidden; perspective: 1200px; perspective-origin: 50% 50%; touch-action: pan-y; }
-  .gallery-card { position: relative; flex: 1 1 0; min-width: 0; min-height: 0; overflow: hidden; border-radius: var(--radius-md); cursor: pointer; outline: none; transform-style: preserve-3d; transform-origin: center; background: #100e0e; box-shadow: 0 10px 30px -18px rgba(0,0,0,.9); will-change: flex-grow, transform; -webkit-tap-highlight-color: transparent; transition: flex-grow .6s var(--ease-out), transform .6s var(--ease-out), box-shadow .45s ease, opacity .45s ease; }
-  .gallery-card[data-side="left"] { transform: perspective(1100px) rotateX(-5deg); }
-  .gallery-card[data-side="right"] { transform: perspective(1100px) rotateX(5deg); }
-  .gallery-card[aria-current="true"] { flex-grow: 5.5; transform: perspective(1100px) rotateX(0); box-shadow: 0 0 0 1px rgba(192,91,81,.34), 0 22px 48px rgba(0,0,0,.38); }
+  /* A foto de cada tira tem tamanho fixo (o da tira aberta) e fica parada: só a "janela" abre e fecha.
+     Assim nada é redimensionado durante a animação e a troca de corte é um fade, não um pulo. */
+  .gallery-track { --g-gap: 8px; --g-active: 5.5; --g-h: min(620px, 78dvh); --g-ease: cubic-bezier(0.22, 0.61, 0.36, 1); container-type: inline-size; display: flex; flex-direction: column; gap: var(--g-gap); width: 100%; height: var(--g-h); overflow: hidden; touch-action: pan-y; }
+  .gallery-card { position: relative; flex: 1 1 0; min-width: 0; min-height: 0; overflow: hidden; border-radius: var(--radius-md); cursor: pointer; outline: none; background: #100e0e; -webkit-tap-highlight-color: transparent; transition: flex-grow .75s var(--g-ease), transform .75s var(--g-ease), box-shadow .5s ease, opacity .45s ease; }
+  .gallery-card[data-side="left"] { transform: perspective(1100px) rotateX(-4deg); }
+  .gallery-card[data-side="right"] { transform: perspective(1100px) rotateX(4deg); }
+  .gallery-card[aria-current="true"] { flex-grow: var(--g-active); transform: perspective(1100px) rotateX(0); box-shadow: 0 0 0 1px rgba(192,91,81,.34), 0 22px 48px rgba(0,0,0,.38); }
   .gallery-card:focus-visible { box-shadow: 0 0 0 2px var(--accent), 0 22px 48px rgba(0,0,0,.38); }
   .gallery-card__frame { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
-  .gallery-card__media { position: absolute; top: 50%; left: 0; width: 100%; height: max(100%,300px); overflow: hidden; background: #090909; transform: translateY(calc(-50% + var(--ag-shift,0px))) scale(1.06); filter: grayscale(1); transition: width .6s var(--ease-out), transform .7s var(--ease-out), filter .55s ease; will-change: transform, filter; }
+  .gallery-card__media { position: absolute; top: 50%; left: 0; width: 100%; height: calc((var(--g-h) - (var(--g-n, 6) - 1) * var(--g-gap)) * var(--g-active) / (var(--g-active) + var(--g-n, 6) - 1)); overflow: hidden; background: #090909; transform: translateY(calc(-50% + var(--ag-shift,0px))) scale(1.05); transition: transform .75s var(--g-ease); will-change: transform; }
   .gallery-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
-  .gallery-card__backdrop { z-index: 0; object-fit: cover; opacity: 0; filter: blur(20px) brightness(.42) saturate(.75); transform: scale(1.14); transition: opacity .55s ease; }
-  .gallery-card__image { z-index: 1; object-fit: cover; transition: object-position .55s ease; }
-  .gallery-card__overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg,transparent 45%,rgba(8,8,8,.52) 100%),rgba(8,8,8,.34); transition: background-color .55s ease, opacity .55s ease; }
-  .gallery-card[aria-current="true"] .gallery-card__media { filter: grayscale(0); transform: translateY(-50%) scale(1); }
-  .gallery-card[aria-current="true"] .gallery-card__backdrop { opacity: .72; }
-  .gallery-card[aria-current="true"] .gallery-card__image { object-fit: contain; }
+  .gallery-card__backdrop { z-index: 0; object-fit: cover; opacity: 0; filter: blur(20px) brightness(.42) saturate(.75); transform: scale(1.14); transition: opacity .2s ease .5s; }
+  .gallery-card__image { z-index: 1; object-fit: contain; opacity: 0; transition: opacity .2s ease .5s; }
+  .gallery-card__cover { z-index: 2; object-fit: cover; object-position: center 30%; filter: grayscale(1); opacity: 1; transition: opacity .55s ease; }
+  .gallery-card__overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg,transparent 45%,rgba(8,8,8,.52) 100%),rgba(8,8,8,.34); transition: opacity .55s ease; }
+  .gallery-card[aria-current="true"] .gallery-card__media { transform: translateY(-50%) scale(1); }
+  .gallery-card[aria-current="true"] .gallery-card__backdrop { opacity: .72; transition: opacity .15s ease 0s; }
+  .gallery-card[aria-current="true"] .gallery-card__image { opacity: 1; transition: opacity .15s ease 0s; }
+  .gallery-card[aria-current="true"] .gallery-card__cover { opacity: 0; }
   .gallery-card[aria-current="true"] .gallery-card__overlay { opacity: .18; }
   @media (min-width: 900px) {
-    .gallery-track { flex-direction: row; height: clamp(440px, 42vw, 580px); gap: 10px; perspective: 1400px; touch-action: auto; }
-    .gallery-card[data-side="left"] { transform: perspective(1200px) rotateY(8deg); }
-    .gallery-card[data-side="right"] { transform: perspective(1200px) rotateY(-8deg); }
-    .gallery-card[aria-current="true"] { flex-grow: 5.42; transform: perspective(1200px) rotateY(0); }
-    .gallery-card__media { top: 0; left: 50%; width: max(100%,560px); height: 100%; transform: translateX(calc(-50% + var(--ag-shift,0px))) scale(1.06); }
-    .gallery-card[aria-current="true"] .gallery-card__media { width: 100%; transform: translateX(-50%) scale(1); }
-    .gallery-card[aria-current="true"]:hover .gallery-card__media { transform: translateX(-50%) scale(1.025); }
+    .gallery-track { --g-gap: 10px; --g-active: 5.42; --g-h: clamp(440px, 42vw, 580px); flex-direction: row; touch-action: auto; }
+    .gallery-card[data-side="left"] { transform: perspective(1200px) rotateY(6deg); }
+    .gallery-card[data-side="right"] { transform: perspective(1200px) rotateY(-6deg); }
+    .gallery-card[aria-current="true"] { transform: perspective(1200px) rotateY(0); }
+    .gallery-card__media { top: 0; left: 50%; height: 100%; width: max(100%, 560px); width: calc((100cqw - (var(--g-n, 6) - 1) * var(--g-gap)) * var(--g-active) / (var(--g-active) + var(--g-n, 6) - 1)); transform: translateX(calc(-50% + var(--ag-shift,0px))) scale(1.05); }
+    .gallery-card[aria-current="true"] .gallery-card__media { transform: translateX(-50%) scale(1); }
+    .gallery-card[aria-current="true"]:hover .gallery-card__media { transform: translateX(-50%) scale(1.02); }
   }
 
   /* ---------- Processo ---------- */
-  .steps { position: relative; list-style: none; margin: 0; padding: 46px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); }
-  .steps::before { content: ""; position: absolute; top: 5px; left: 0; right: 0; height: 1px; background: var(--accent-deep); transform-origin: left; }
-  .step { position: relative; display: flex; flex-direction: column; gap: 12px; }
-  .step::before { content: ""; position: absolute; top: -46px; left: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--bg-alt); border: 1px solid var(--accent); }
-  .step-num { font-family: var(--font-serif); font-style: italic; font-size: clamp(44px, 4.4vw, 64px); line-height: 0.9; color: var(--accent); }
-  .step-title { margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.05; color: var(--off-white); }
-  .step .body-text { font-size: 15px; max-width: 28ch; }
+  /* As quatro etapas formam uma frase só: cada título puxa um traço até o próximo. */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 clamp(18px, 2.2vw, 30px); }
+  .step { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .step-who { display: flex; gap: 10px; }
+  .step-who span:first-child { color: var(--accent); }
+  .step-head { display: flex; align-items: center; gap: clamp(10px, 1.2vw, 18px); }
+  .step-title { flex: none; margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.3vw, 48px); line-height: 1; letter-spacing: -0.012em; color: var(--off-white); }
+  .step:last-child .step-title { font-style: italic; color: var(--accent); }
+  .step-line { position: relative; flex: 1; min-width: 12px; height: 1px; background: rgba(239,233,221,0.28); transform-origin: left; }
+  .step-line::after { content: ""; position: absolute; right: 0; top: -3px; width: 7px; height: 7px; border-top: 1px solid rgba(239,233,221,0.5); border-right: 1px solid rgba(239,233,221,0.5); transform: rotate(45deg); }
+  .step:last-child .step-line { display: none; }
+  .step .body-text { font-size: 15px; line-height: 1.6; max-width: 30ch; }
   @media (max-width: 899px) {
-    .steps { grid-template-columns: 1fr; gap: 34px; padding: 0 0 0 32px; }
-    .steps::before { top: 8px; bottom: 8px; left: 5px; right: auto; width: 1px; height: auto; transform-origin: top; }
-    .step::before { top: 8px; left: -32px; }
+    .steps { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--hair); }
+    .step { gap: 12px; padding: 22px 0 24px; border-bottom: 1px solid var(--hair); }
+    .step-title { font-size: 32px; }
+    .step-line { display: none; }
     .step .body-text { max-width: none; }
   }
 
@@ -397,12 +406,9 @@
   /* ---------- Linhas que se desenham ao rolar (só onde o navegador suporta) ---------- */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
-      .steps::before { animation: ruleDraw linear both; animation-timeline: view(); animation-range: entry 25% cover 45%; }
+      .step-line { animation: ruleDraw linear both; animation-timeline: view(); animation-range: entry 30% cover 42%; }
       .work-rows, .faq-list, .ficha, .checks, .send-list { position: relative; border-top-color: transparent; }
       .work-rows::before, .faq-list::before, .ficha::before, .checks::before, .send-list::before { content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: var(--hair); transform-origin: left; animation: ruleDraw linear both; animation-timeline: view(); animation-range: entry 10% cover 30%; }
-    }
-    @media (prefers-reduced-motion: no-preference) and (max-width: 899px) {
-      .steps::before { animation-name: ruleDrawY; animation-range: entry 10% cover 60%; }
     }
   }
 
@@ -670,13 +676,14 @@
       </div>
     </div>
   </div>
-  <div class="gallery-track" ref="{{ galeriaRef }}" onTouchStart="{{ galeriaTouchStart }}" onTouchEnd="{{ galeriaTouchEnd }}" role="list" aria-label="Galeria de tatuagens">
+  <div class="gallery-track" ref="{{ galeriaRef }}" style="{{ galeriaTrackStyle }}" onMouseLeave="{{ galeriaHoverCancel }}" onTouchStart="{{ galeriaTouchStart }}" onTouchEnd="{{ galeriaTouchEnd }}" role="list" aria-label="Galeria de tatuagens">
     <sc-for list="{{ galeria }}" as="g" hint-placeholder-count="6">
-      <div class="gallery-card" data-reveal-id="galeria-{{ $index }}" data-side="{{ g.side }}" style="{{ g.style }}" aria-current="{{ g.isActive }}" onMouseEnter="{{ g.onEnter }}" onClick="{{ g.onClick }}" onFocus="{{ g.onEnter }}" onKeyDown="{{ g.onKeyDown }}" role="listitem" tabindex="0" aria-label="Selecionar ou abrir {{ g.caption }}">
+      <div class="gallery-card" data-reveal-id="galeria-{{ $index }}" data-side="{{ g.side }}" style="{{ g.style }}" aria-current="{{ g.isActive }}" onMouseEnter="{{ g.onHover }}" onClick="{{ g.onClick }}" onFocus="{{ g.onEnter }}" onKeyDown="{{ g.onKeyDown }}" role="listitem" tabindex="0" aria-label="Selecionar ou abrir {{ g.caption }}">
         <span class="gallery-card__frame">
           <span class="gallery-card__media">
             <img class="gallery-card__backdrop" src="{{ g.img }}" alt="" aria-hidden="true" loading="lazy" draggable="false" />
-            <img class="gallery-card__image" src="{{ g.img }}" alt="{{ g.caption }}" loading="lazy" style="object-position:center 20%;" draggable="false" />
+            <img class="gallery-card__image" src="{{ g.img }}" alt="{{ g.caption }}" loading="lazy" draggable="false" />
+            <img class="gallery-card__cover" src="{{ g.img }}" alt="" aria-hidden="true" loading="lazy" draggable="false" />
           </span>
           <span class="gallery-card__overlay" aria-hidden="true"></span>
         </span>
@@ -697,8 +704,11 @@
   <ol class="steps">
     <sc-for list="{{ processoSteps }}" as="step" hint-placeholder-count="4">
       <li class="step" data-reveal-id="processo-{{ $index }}" style="{{ step.style }}">
-        <span class="step-num" aria-hidden="true">{{ step.num }}</span>
-        <h3 class="step-title">{{ step.title }}</h3>
+        <div class="label step-who"><span>{{ step.num }}</span><span>{{ step.who }}</span></div>
+        <div class="step-head">
+          <h3 class="step-title">{{ step.title }}</h3>
+          <span class="step-line" aria-hidden="true"></span>
+        </div>
         <p class="body-text">{{ step.desc }}</p>
       </li>
     </sc-for>
@@ -918,10 +928,10 @@ class Component extends DCLogic {
   ];
 
   processoSteps = [
-    { num: '1', title: 'Sua ideia', desc: 'Você envia sua ideia, região do corpo, tamanho aproximado e referências.' },
-    { num: '2', title: 'Orçamento', desc: 'Lucas analisa o projeto e envia todas as informações sobre valores, disponibilidade e sessão.' },
-    { num: '3', title: 'Criação', desc: 'O desenho é desenvolvido pensando na sua ideia, estilo e anatomia.' },
-    { num: '4', title: 'Tattoo', desc: 'No dia marcado, ajustamos os últimos detalhes e iniciamos o projeto.' }
+    { num: '01', who: 'Você envia', title: 'Sua ideia', desc: 'Você envia sua ideia, região do corpo, tamanho aproximado e referências.' },
+    { num: '02', who: 'Lucas responde', title: 'Orçamento', desc: 'Lucas analisa o projeto e envia todas as informações sobre valores, disponibilidade e sessão.' },
+    { num: '03', who: 'Lucas desenha', title: 'Criação', desc: 'O desenho é desenvolvido pensando na sua ideia, estilo e anatomia.' },
+    { num: '04', who: 'No estúdio', title: 'Tattoo.', desc: 'No dia marcado, ajustamos os últimos detalhes e iniciamos o projeto.' }
   ];
 
   confiancaItems = ['MATERIAIS DESCARTÁVEIS', 'ATENDIMENTO INDIVIDUAL', 'AMBIENTE PREPARADO', 'ORIENTAÇÕES PÓS-TATTOO'];
@@ -1040,6 +1050,12 @@ class Component extends DCLogic {
     if (!total) return;
     this.setState({ activeGallery: (i + total) % total });
   };
+  // Só abre a tira se o mouse parar nela um instante: passar rápido por cima não dispara várias trocas.
+  galeriaHover = (i) => {
+    clearTimeout(this._galleryHoverTimer);
+    this._galleryHoverTimer = setTimeout(() => this.setActiveGallery(i), 70);
+  };
+  galeriaHoverCancel = () => clearTimeout(this._galleryHoverTimer);
   galeriaScrollPrev = () => this.setActiveGallery(this.state.activeGallery - 1);
   galeriaScrollNext = () => this.setActiveGallery(this.state.activeGallery + 1);
   galeriaTouchStart = (e) => {
@@ -1132,7 +1148,9 @@ class Component extends DCLogic {
       const onOpen = () => this.openLightbox(galeriaImages, galeriaImages.indexOf(g.img));
       const isActive = this.state.activeGallery === i;
       const onEnter = () => this.setActiveGallery(i);
+      const onHover = () => this.galeriaHover(i);
       const onClick = () => {
+        this.galeriaHoverCancel();
         if (this.state.activeGallery === i) onOpen();
         else this.setActiveGallery(i);
       };
@@ -1153,12 +1171,14 @@ class Component extends DCLogic {
       isActive,
       side: i < this.state.activeGallery ? 'left' : (i > this.state.activeGallery ? 'right' : 'active'),
       onEnter,
+      onHover,
       onClick,
       onKeyDown,
       style: {
         opacity: this.state.revealed['galeria-' + i] ? 1 : 0,
         '--ag-shift': Math.max(-1.5, Math.min(1.5, this.state.activeGallery - i)) * 18 + 'px',
-        transitionDelay: this.state.revealed['galeria-' + i] ? i * 45 + 'ms' : '0ms'
+        // o atraso em cascata vale só para o fade de entrada (4º item da transição), nunca para abrir/fechar
+        transitionDelay: '0ms, 0ms, 0ms, ' + (this.state.revealed['galeria-' + i] ? i * 45 : 0) + 'ms'
       }
       };
     });
@@ -1288,6 +1308,8 @@ class Component extends DCLogic {
       lightboxDragMove: this.lightboxDragMove,
       lightboxDragEnd: this.lightboxDragEnd,
       galeriaRef: this.galeriaRef,
+      galeriaTrackStyle: { '--g-n': galeria.length },
+      galeriaHoverCancel: this.galeriaHoverCancel,
       galeriaScrollPrev: this.galeriaScrollPrev,
       galeriaScrollNext: this.galeriaScrollNext,
       galeriaTouchStart: this.galeriaTouchStart,

@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lucas Reis Tattoo | Tatuagem autoral em São João del Rei</title>
+<meta name="description" content="Portfólio de Lucas Reis, tattoo artist em São João del Rei. Projetos autorais, Fine Line e Realismo desenvolvidos para cada cliente.">
+<meta name="theme-color" content="#0B0B0B">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lucas Reis Tattoo | Tatuagem com identidade">
+<meta property="og:description" content="Projetos autorais e personalizados em São João del Rei.">
+<meta property="og:image" content="./img/hero-tattooing.webp">
+<link rel="preload" href="./img/hero-tattooing.webp" as="image" type="image/webp">
+<link rel="preload" href="./fonts/Nature-Beauty-Personal-Use.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -23,7 +33,8 @@
     --off-white: #EEEAE2;
     --text-secondary: #9A948C;
     --text-tertiary: #6E6862;
-    --accent: #8E2B24;
+    --accent: #C05B51;
+    --accent-deep: #8E2B24;
     --hair: rgba(238,234,226,0.14);
     --hair-light: rgba(11,11,11,0.16);
     --radius-lg: 14px;
@@ -35,13 +46,25 @@
     --font-logo: 'Nature Beauty', serif;
     --font-mobile-menu: 'Cormorant Garamond', serif;
   }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--off-white); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; color-scheme: dark; overflow-x: clip; }
+  body { margin: 0; background: var(--bg); color: var(--off-white); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
   * { box-sizing: border-box; }
   a { color: var(--off-white); text-decoration: none; }
   a:hover { color: var(--accent); }
-  ::selection { background: var(--accent); color: var(--off-white); }
+  ::selection { background: var(--accent-deep); color: var(--off-white); }
   img { display: block; max-width: 100%; }
+  button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  button { font: inherit; }
+  section[id] { scroll-margin-top: 84px; }
+
+  .skip-link { position: fixed; top: 12px; left: 12px; z-index: 2000; padding: 11px 16px; border-radius: var(--radius-sm); background: var(--off-white); color: var(--ink); font: 700 12px/1 var(--font-sans); letter-spacing: .05em; transform: translateY(-160%); transition: transform .2s ease; }
+  .skip-link:focus { transform: translateY(0); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .img-frame:focus-visible, .depo-item:focus-visible { outline-offset: 5px; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #3f3b37; border: 3px solid var(--bg); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
   body::after {
     content: "";
@@ -55,6 +78,7 @@
   @media (max-width: 899px) {
     .section { padding: clamp(48px,8vw,64px) 20px; }
     .section-tight { padding: 44px 20px 48px; }
+    #top { padding-bottom: calc(104px + env(safe-area-inset-bottom)) !important; }
   }
   @media (min-width: 900px) {
     .manifesto-band { padding-top: clamp(32px,4vw,48px); padding-bottom: clamp(32px,4vw,48px); }
@@ -86,14 +110,14 @@
   .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-weight: 600; font-size: 13px; letter-spacing: 0.05em; border-radius: 7px; transition: background .3s ease, color .3s ease, transform .25s ease, border-color .3s ease; cursor: pointer; }
   .btn:active { transform: scale(0.98); }
   .btn-solid { background: var(--off-white); color: var(--ink); padding: 17px 30px; }
-  .btn-solid:hover { background: var(--accent); color: var(--off-white); }
+  .btn-solid:hover { background: var(--accent-deep); color: var(--off-white); }
   .btn-outline { border: 1px solid rgba(238,234,226,0.35); color: var(--off-white); padding: 10px 20px; }
   .btn-outline:hover { background: var(--off-white); color: var(--ink); border-color: var(--off-white); }
 
   .link-underline { font-family: var(--font-sans); font-size: 13px; letter-spacing: 0.05em; color: var(--off-white); border-bottom: 1px solid rgba(238,234,226,0.35); padding-bottom: 5px; transition: color .3s ease, border-color .3s ease; }
   .link-underline:hover { color: var(--accent); border-color: var(--accent); }
 
-  .nav-link { position: relative; font-family: var(--font-logo); font-size: 14px; letter-spacing: 0.06em; color: var(--off-white); padding-bottom: 3px; }
+  .nav-link { position: relative; font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: 0.09em; color: var(--off-white); padding-bottom: 5px; }
   .nav-link::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--accent); transition: right .3s ease; }
   .nav-link:hover::after { right: 0; }
 
@@ -101,6 +125,7 @@
   .img-frame--md { border-radius: var(--radius-md); }
   .img-frame--sm { border-radius: var(--radius-sm); }
   .img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+  .img-frame[role="button"] { cursor: pointer; }
 
   .lightbox-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(8,8,8,0.88); backdrop-filter: blur(16px) saturate(1.1); display: flex; align-items: center; justify-content: center; padding: 40px; animation: lightboxFade .25s ease; }
   @keyframes lightboxFade { from { opacity: 0; } to { opacity: 1; } }
@@ -146,12 +171,14 @@
   .icon-btn--light { border-color: var(--hair-light); color: var(--ink); }
   .icon-btn--light:hover { background: var(--ink); color: var(--off-white); }
 
-  .style-row { display: flex; justify-content: space-between; align-items: center; background: #131313; border: 1px solid rgba(238,234,226,0.06); border-radius: var(--radius-md); padding: clamp(16px,2.2vw,22px) clamp(20px,2.6vw,26px); margin-bottom: 12px; cursor: pointer; box-shadow: 0 0 0 1px rgba(200,200,205,0.06), 0 0 18px 1px rgba(190,190,200,0.09), 0 14px 30px rgba(0,0,0,0.22); transition: box-shadow .4s ease, transform .4s ease, background .4s ease; }
+  .style-row { appearance: none; width: 100%; display: flex; justify-content: space-between; align-items: center; text-align: left; background: #131313; border: 1px solid rgba(238,234,226,0.06); border-radius: var(--radius-md); padding: clamp(16px,2.2vw,22px) clamp(20px,2.6vw,26px); margin-bottom: 12px; cursor: pointer; box-shadow: 0 0 0 1px rgba(200,200,205,0.06), 0 0 18px 1px rgba(190,190,200,0.09), 0 14px 30px rgba(0,0,0,0.22); transition: box-shadow .4s ease, transform .4s ease, background .4s ease; }
   .style-row:hover { transform: translateY(-3px); background: #161616; box-shadow: 0 0 0 1px rgba(210,210,218,0.14), 0 0 28px 3px rgba(200,200,215,0.2), 0 18px 36px rgba(0,0,0,0.28); }
   .style-name { font-family: var(--font-serif); font-weight: 500; font-size: clamp(20px,3vw,30px); color: var(--off-white); letter-spacing: 0.01em; transition: color .3s ease; }
   .style-arrow { font-family: var(--font-sans); font-size: 16px; color: var(--accent); transition: transform .3s ease; display: inline-block; }
   .style-row:hover .style-arrow { transform: translateX(8px); }
   .style-row:hover .style-name { color: var(--accent); }
+  .style-row[aria-pressed="true"] { background: #181514; border-color: rgba(142,43,36,.5); }
+  .style-row[aria-pressed="true"] .style-name, .style-row[aria-pressed="true"] .style-arrow { color: var(--accent); }
 
   .process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(16px,2vw,20px); }
   @media (max-width: 899px) { .process-grid { grid-template-columns: 1fr; } }
@@ -169,16 +196,18 @@
   .works-catalog { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: clamp(32px,4vw,56px); align-items: center; max-width: 1240px; margin: 0 auto; }
   @media (max-width: 899px) { .works-catalog { grid-template-columns: 1fr; } }
   .works-catalog-image { width: 100%; aspect-ratio: 4/5; max-height: min(600px,66vh); cursor: pointer; }
-  .works-catalog-list { display: flex; flex-direction: column; }
-  .work-list-row { display: flex; align-items: center; gap: 18px; min-height: 88px; padding: 4px; border-bottom: 1px solid rgba(238,234,226,0.12); cursor: pointer; transition: padding-left .3s ease, border-color .3s ease; }
-  .work-list-row:first-child { border-top: 1px solid rgba(238,234,226,0.12); }
+  .works-catalog-list { display: flex; flex-direction: column; gap: 12px; }
+  .work-list-row { appearance: none; width: 100%; display: flex; align-items: center; gap: 18px; min-height: 92px; padding: 14px 18px; color: inherit; text-align: left; background: #111; border: 1px solid rgba(238,234,226,0.09); border-radius: var(--radius-md); cursor: pointer; box-shadow: 0 12px 28px rgba(0,0,0,.18); transition: transform .28s cubic-bezier(0.16,1,0.3,1), border-color .28s ease, background .28s ease, box-shadow .28s ease; }
   .work-list-num { font-family: var(--font-serif); font-size: clamp(18px,1.8vw,22px); color: var(--text-tertiary); width: 32px; flex-shrink: 0; transition: color .3s ease; }
   .work-list-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
   .work-list-category { font-family: var(--font-serif); font-weight: 500; font-size: clamp(21px,2.4vw,28px); color: var(--off-white); transition: color .3s ease; }
   .work-list-year { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); }
-  .work-list-row:hover { padding-left: 14px; border-color: var(--accent); }
+  .work-list-row:hover { transform: translateX(4px); border-color: rgba(192,91,81,.55); background: #151312; box-shadow: 0 16px 34px rgba(0,0,0,.25); }
   .work-list-row:hover .work-list-category, .work-list-row:hover .work-list-num { color: var(--accent); }
   .work-list-row:hover .style-arrow { transform: translateX(8px); color: var(--accent); }
+  .work-list-row[aria-pressed="true"] { border-color: var(--accent); background: rgba(142,43,36,.11); box-shadow: 0 16px 34px rgba(0,0,0,.28); }
+  .work-list-row[aria-pressed="true"] .work-list-category, .work-list-row[aria-pressed="true"] .work-list-num { color: var(--accent); }
+  .work-list-row[aria-pressed="true"] .style-arrow { color: var(--accent); transform: translateX(3px); }
 
   .studio-composition { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,4vw,56px); align-items: stretch; max-width: 1240px; margin: 0 auto; }
   .studio-composition-image { width: 100%; height: 100%; min-height: 420px; max-height: 560px; }
@@ -203,20 +232,40 @@
 
   .faq-row { background: #131313; border: 1px solid rgba(238,234,226,0.06); border-radius: var(--radius-md); margin-bottom: 12px; padding: 0 clamp(20px,3vw,28px); box-shadow: 0 0 0 1px rgba(200,200,205,0.06), 0 0 18px 1px rgba(190,190,200,0.09), 0 14px 30px rgba(0,0,0,0.22); transition: box-shadow .4s ease; }
   .faq-row:hover { box-shadow: 0 0 0 1px rgba(210,210,218,0.14), 0 0 28px 3px rgba(200,200,215,0.2), 0 18px 36px rgba(0,0,0,0.28); }
-  .faq-head { display: flex; justify-content: space-between; align-items: center; padding: clamp(18px,2.4vw,24px) 0; cursor: pointer; gap: 24px; }
+  .faq-head { appearance: none; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: clamp(18px,2.4vw,24px) 0; color: inherit; text-align: left; background: transparent; border: 0; cursor: pointer; gap: 24px; }
   .faq-question { font-family: var(--font-sans); font-size: clamp(14px,1.8vw,17px); letter-spacing: 0.01em; color: var(--off-white); }
   .faq-symbol { font-family: var(--font-sans); font-size: 19px; color: var(--accent); flex-shrink: 0; display: inline-block; transition: transform .35s ease; }
-  .faq-answer { max-height: 0; opacity: 0; overflow: hidden; transform: translateY(-6px); transition: max-height .45s cubic-bezier(0.16,1,0.3,1), opacity .35s ease, transform .4s cubic-bezier(0.16,1,0.3,1), padding-bottom .45s cubic-bezier(0.16,1,0.3,1); }
+  .faq-answer-wrap { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .4s cubic-bezier(0.16,1,0.3,1), opacity .25s ease; }
+  .faq-answer { min-height: 0; overflow: hidden; }
+  .faq-answer-wrap[aria-hidden="false"] .faq-answer { padding-bottom: 28px; }
 
-  .placeholder-fill { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-secondary); font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px; background: repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 2px,#141414 2px,#141414 4px); }
-
-  .gallery-track { display: flex; gap: clamp(16px,2vw,22px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
-  .gallery-track::-webkit-scrollbar { display: none; }
-  .gallery-card { flex: 0 0 auto; width: min(320px,72vw); scroll-snap-align: start; transition: transform .5s cubic-bezier(0.34,1.56,0.64,1); will-change: transform; }
-  .gallery-card .img-frame { width: 100%; aspect-ratio: 4/5; }
-  .gallery-card:hover { transform: scale(1.06) rotate(-1.2deg); z-index: 2; }
-  .gallery-card:nth-child(even):hover { transform: scale(1.06) rotate(1.2deg); }
+  .gallery-track { display: flex; flex-direction: column; gap: 8px; width: 100%; height: min(620px,78dvh); overflow: hidden; perspective: 1200px; perspective-origin: 50% 50%; touch-action: pan-y; }
+  .gallery-card { position: relative; flex: 1 1 0; min-width: 0; min-height: 0; overflow: hidden; border-radius: var(--radius-md); cursor: pointer; outline: none; transform-style: preserve-3d; transform-origin: center; background: #100e0e; box-shadow: 0 10px 30px -18px rgba(0,0,0,.9); will-change: flex-grow, transform; -webkit-tap-highlight-color: transparent; transition: flex-grow .6s cubic-bezier(0.16,1,0.3,1), transform .6s cubic-bezier(0.16,1,0.3,1), box-shadow .45s ease, opacity .45s ease; }
+  .gallery-card[data-side="left"] { transform: perspective(1100px) rotateX(-5deg); }
+  .gallery-card[data-side="right"] { transform: perspective(1100px) rotateX(5deg); }
+  .gallery-card[aria-current="true"] { flex-grow: 5.5; transform: perspective(1100px) rotateX(0); box-shadow: 0 0 0 1px rgba(192,91,81,.34), 0 22px 48px rgba(0,0,0,.38); }
+  .gallery-card:focus-visible { box-shadow: 0 0 0 2px var(--accent), 0 22px 48px rgba(0,0,0,.38); }
+  .gallery-card__frame { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+  .gallery-card__media { position: absolute; top: 50%; left: 0; width: 100%; height: max(100%,300px); overflow: hidden; background: #090909; transform: translateY(calc(-50% + var(--ag-shift,0px))) scale(1.06); filter: grayscale(1); transition: width .6s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1), filter .55s ease; will-change: transform, filter; }
+  .gallery-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+  .gallery-card__backdrop { z-index: 0; object-fit: cover; opacity: 0; filter: blur(20px) brightness(.42) saturate(.75); transform: scale(1.14); transition: opacity .55s ease; }
+  .gallery-card__image { z-index: 1; object-fit: cover; transition: object-position .55s ease; }
+  .gallery-card__overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg,transparent 45%,rgba(8,8,8,.52) 100%),rgba(8,8,8,.34); transition: background-color .55s ease, opacity .55s ease; }
+  .gallery-card[aria-current="true"] .gallery-card__media { filter: grayscale(0); transform: translateY(-50%) scale(1); }
+  .gallery-card[aria-current="true"] .gallery-card__backdrop { opacity: .72; }
+  .gallery-card[aria-current="true"] .gallery-card__image { object-fit: contain; }
+  .gallery-card[aria-current="true"] .gallery-card__overlay { opacity: .18; }
   .gallery-nav { display: flex; gap: 10px; }
+
+  @media (min-width: 900px) {
+    .gallery-track { flex-direction: row; height: clamp(430px,40vw,540px); gap: 10px; perspective: 1400px; touch-action: auto; }
+    .gallery-card[data-side="left"] { transform: perspective(1200px) rotateY(8deg); }
+    .gallery-card[data-side="right"] { transform: perspective(1200px) rotateY(-8deg); }
+    .gallery-card[aria-current="true"] { flex-grow: 5.42; transform: perspective(1200px) rotateY(0); }
+    .gallery-card__media { top: 0; left: 50%; width: max(100%,560px); height: 100%; transform: translateX(calc(-50% + var(--ag-shift,0px))) scale(1.06); }
+    .gallery-card[aria-current="true"] .gallery-card__media { width: 100%; transform: translateX(-50%) scale(1); }
+    .gallery-card[aria-current="true"]:hover .gallery-card__media { transform: translateX(-50%) scale(1.025); }
+  }
 
   .hero-portrait { aspect-ratio: 4/5; max-height: min(640px,72vh); margin: 0 auto; }
 
@@ -238,25 +287,30 @@
   }
 
   .depo-marquee-wrap { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); }
+  .section-on-light .eyebrow { color: var(--accent-deep); }
   .depo-marquee-track { display: flex; gap: 20px; width: max-content; animation: depoScroll 60s linear infinite; }
-  .depo-marquee-wrap:hover .depo-marquee-track { animation-play-state: paused; }
-  .depo-item { height: 420px; width: auto; border-radius: var(--radius-lg); flex-shrink: 0; cursor: pointer; box-shadow: 0 14px 34px rgba(11,11,11,0.16), 0 0 22px 2px rgba(190,190,200,0.10); transition: box-shadow .35s ease, transform .35s ease; }
+  .depo-marquee-wrap:hover .depo-marquee-track, .depo-marquee-wrap:focus-within .depo-marquee-track, .depo-marquee-wrap:active .depo-marquee-track { animation-play-state: paused; }
+  .depo-item { width: 336px; height: 420px; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius-lg); flex-shrink: 0; cursor: pointer; box-shadow: 0 14px 34px rgba(11,11,11,0.16), 0 0 22px 2px rgba(190,190,200,0.10); transition: box-shadow .35s ease, transform .35s ease; }
   .depo-item:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(11,11,11,0.22), 0 0 30px 4px rgba(200,200,215,0.18); }
   @keyframes depoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (max-width: 899px) {
-    .depo-item { height: 300px; }
+    .depo-item { width: 240px; height: 300px; }
     .depo-marquee-track { animation-duration: 40s; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .depo-marquee-track { animation: none; }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    [data-reveal-id] { opacity: 1 !important; transform: none !important; }
+    .depo-marquee-track { animation: none; overflow-x: auto; }
   }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"></link>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"></link>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=UnifrakturCook:wght@700&family=Rye&display=swap" rel="stylesheet"></link>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet"></link>
 </helmet>
 
 <div style="{{ pageWrapperStyle }}">
+<a href="#main-content" class="skip-link">Pular para o conteúdo</a>
 
 <!-- CUSTOM CURSOR -->
 <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
@@ -265,20 +319,20 @@
 
 <!-- HEADER -->
 <header style="{{ headerStyle }}">
-  <a href="#top" style="font-family:var(--font-logo);font-size:clamp(20px,2.2vw,26px);font-weight:400;letter-spacing:0.04em;color:#fff;">Lucas Reis</a>
+  <a href="#top" aria-label="Lucas Reis Tattoo — início" style="font-family:var(--font-logo);font-size:clamp(20px,2.2vw,26px);font-weight:400;letter-spacing:0.04em;color:#fff;">Lucas Reis</a>
 
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-    <nav style="display:flex;align-items:center;gap:clamp(20px,3vw,40px);">
+    <nav aria-label="Navegação principal" style="display:flex;align-items:center;gap:clamp(20px,3vw,40px);">
       <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="5">
         <a href="{{ link.href }}" class="nav-link">{{ link.label }}</a>
       </sc-for>
-      <a href="{{ waLink }}" target="_blank" class="btn btn-outline">ORÇAMENTO ↗</a>
+      <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">ORÇAMENTO ↗</a>
     </nav>
   </sc-if>
 
   <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
     <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}">
-      <button onClick="{{ toggleMobileMenu }}" aria-label="Menu" style="background:none;border:none;padding:8px;display:flex;flex-direction:column;gap:6px;cursor:pointer;">
+      <button onClick="{{ toggleMobileMenu }}" aria-label="Abrir menu" aria-expanded="{{ mobileMenuOpen }}" style="background:none;border:none;padding:10px;display:flex;flex-direction:column;gap:6px;cursor:pointer;color:var(--off-white);">
         <div style="width:26px;height:1px;background:var(--off-white);"></div>
         <div style="width:26px;height:1px;background:var(--off-white);"></div>
       </button>
@@ -288,20 +342,21 @@
 
 <!-- MOBILE FULLSCREEN MENU -->
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-  <div class="mobile-menu-overlay">
+  <div class="mobile-menu-overlay" role="dialog" aria-modal="true" aria-label="Menu principal">
     <button class="mobile-menu-close" onClick="{{ toggleMobileMenu }}" aria-label="Fechar">×</button>
-    <div class="mobile-menu-links">
+    <nav class="mobile-menu-links" aria-label="Navegação mobile">
       <sc-for list="{{ mobileNavLinks }}" as="link" hint-placeholder-count="5">
         <a href="{{ link.href }}" onClick="{{ closeMenu }}" class="mobile-menu-link">
           <span class="mobile-menu-num">{{ link.num }}</span>
           <span>{{ link.label }}</span>
         </a>
       </sc-for>
-    </div>
-    <a href="{{ waLink }}" target="_blank" onClick="{{ closeMenu }}" class="btn btn-solid" style="margin-top:4px;padding:13px 26px;font-size:12px;">SOLICITAR ORÇAMENTO</a>
+    </nav>
+    <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" onClick="{{ closeMenu }}" class="btn btn-solid" style="margin-top:4px;padding:13px 26px;font-size:12px;">SOLICITAR ORÇAMENTO</a>
   </div>
 </sc-if>
 
+<main id="main-content" tabindex="-1">
 <!-- HERO -->
 <section id="top" style="position:relative;min-height:92vh;padding:clamp(88px,10vw,124px) clamp(20px,6vw,80px) clamp(32px,5vw,48px);display:flex;flex-direction:column;">
   <div class="hero-darkveil-wrap"><canvas id="hero-darkveil"></canvas></div>
@@ -312,10 +367,10 @@
         <div data-reveal-id="hero-label" class="eyebrow" style="{{ heroLabelStyle }}">TATTOO ARTIST — SÃO JOÃO DEL REI / MG</div>
         <h1 data-reveal-id="hero-headline" class="h1-hero" style="{{ heroHeadlineStyle }}">Tatuagem<br/>com<br/><em>identidade.</em></h1>
         <p class="body-text" style="max-width:420px;font-size:16px;">Projetos autorais e personalizados, pensados para transformar sua ideia em uma tatuagem que realmente tenha a sua cara.</p>
-        <a href="{{ waLink }}" target="_blank" class="btn btn-solid" style="width:fit-content;">SOLICITAR ORÇAMENTO ↗</a>
+        <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" class="btn btn-solid" style="width:fit-content;">SOLICITAR ORÇAMENTO ↗</a>
       </div>
       <div class="img-frame hero-portrait">
-        <img src="./img/hero-tattooing.webp" alt="Lucas Reis tatuando" onClick="{{ heroLightboxOpen }}" fetchpriority="high" style="object-position:center 20%;" />
+        <img src="./img/hero-tattooing.webp" alt="Lucas Reis tatuando no estúdio" onClick="{{ heroLightboxOpen }}" onKeyDown="{{ heroLightboxKey }}" role="button" tabindex="0" aria-label="Ampliar foto de Lucas Reis tatuando" fetchpriority="high" style="object-position:center 20%;" />
       </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:32px;font-family:var(--font-sans);color:var(--text-secondary);font-size:11px;letter-spacing:0.12em;">
@@ -329,7 +384,7 @@
       <div style="font-family:var(--font-sans);font-size:12px;letter-spacing:0.15em;color:var(--accent);">LUCAS REIS<br/><span style="color:var(--text-secondary);">TATTOO ARTIST</span></div>
       <h1 class="h1-hero" style="margin:0;">Tatuagem<br/>com<br/><em>identidade.</em></h1>
       <div class="img-frame" style="aspect-ratio:4/5;">
-        <img src="./img/hero-tattooing.webp" alt="Lucas Reis tatuando" onClick="{{ heroLightboxOpen }}" fetchpriority="high" style="object-position:center 25%;" />
+        <img src="./img/hero-tattooing.webp" alt="Lucas Reis tatuando no estúdio" onClick="{{ heroLightboxOpen }}" onKeyDown="{{ heroLightboxKey }}" role="button" tabindex="0" aria-label="Ampliar foto de Lucas Reis tatuando" fetchpriority="high" style="object-position:center 25%;" />
       </div>
       <p class="body-text" style="font-size:15px;">Projetos autorais e personalizados, pensados para transformar sua ideia em uma tatuagem que realmente tenha a sua cara.</p>
     </div>
@@ -337,7 +392,7 @@
 </section>
 
 <!-- DEPOIMENTOS -->
-<section id="depoimentos" class="section-tight" style="background:var(--off-white);padding-left:0;padding-right:0;">
+<section id="depoimentos" class="section-tight section-on-light" style="background:var(--off-white);padding-left:0;padding-right:0;">
   <div class="eyebrow-block eyebrow-block--center" style="padding:0 clamp(20px,6vw,80px);">
     <div class="eyebrow">DEPOIMENTOS — DIRETO DO WHATSAPP</div>
     <h2 class="h2 h2--light">Quem já<br/>tatuou comigo.</h2>
@@ -345,10 +400,10 @@
   <div class="depo-marquee-wrap">
     <div class="depo-marquee-track">
       <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
-        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" loading="lazy" />
+        <img class="depo-item" src="{{ d.img }}" alt="{{ d.alt }}" onClick="{{ d.onOpen }}" onKeyDown="{{ d.onKeyDown }}" role="button" tabindex="0" loading="lazy" />
       </sc-for>
       <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="8">
-        <img class="depo-item" src="{{ d.img }}" alt="Depoimento de cliente" onClick="{{ d.onOpen }}" loading="lazy" />
+        <img class="depo-item" src="{{ d.img }}" alt="" aria-hidden="true" onClick="{{ d.onOpen }}" tabindex="-1" loading="lazy" />
       </sc-for>
     </div>
   </div>
@@ -363,7 +418,7 @@
 
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
     <div class="works-catalog">
-      <div class="img-frame img-frame--md works-catalog-image" style="cursor:none;" onClick="{{ activeWorkOpen }}" onMouseMove="{{ onWorkMouseMove }}" onMouseEnter="{{ onWorkMouseEnter }}" onMouseLeave="{{ onWorkMouseLeave }}">
+      <div class="img-frame img-frame--md works-catalog-image" style="cursor:none;" onClick="{{ activeWorkOpen }}" onKeyDown="{{ activeWorkKey }}" onMouseMove="{{ onWorkMouseMove }}" onMouseEnter="{{ onWorkMouseEnter }}" onMouseLeave="{{ onWorkMouseLeave }}" role="button" tabindex="0" aria-label="Ampliar trabalho {{ activeWorkCategory }}">
         <img src="{{ activeWorkImg }}" alt="{{ activeWorkCategory }}" loading="lazy" style="object-position:center 28%;" />
         <div class="caption-pill" style="position:absolute;left:16px;bottom:16px;">
           <span class="meta-tag">{{ activeWorkNum }}</span>
@@ -373,14 +428,14 @@
       </div>
       <div class="works-catalog-list">
         <sc-for list="{{ worksListItems }}" as="w" hint-placeholder-count="3">
-          <div class="work-list-row" onMouseEnter="{{ w.onEnter }}" onClick="{{ w.onEnter }}">
+          <button type="button" class="work-list-row" onMouseEnter="{{ w.onEnter }}" onClick="{{ w.onEnter }}" aria-pressed="{{ w.isActive }}">
             <span class="work-list-num">{{ w.num }}</span>
             <div class="work-list-info">
               <span class="work-list-category">{{ w.category }}</span>
               <span class="work-list-year">{{ w.year }}</span>
             </div>
             <span class="style-arrow">→</span>
-          </div>
+          </button>
         </sc-for>
       </div>
     </div>
@@ -389,12 +444,7 @@
   <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
     <div onTouchStart="{{ onWorkTouchStart }}" onTouchEnd="{{ onWorkTouchEnd }}">
       <div class="img-frame" style="width:100%;aspect-ratio:4/5;">
-        <sc-if value="{{ currentMobileWork.hasImg }}" hint-placeholder-val="{{ false }}">
-          <img src="{{ currentMobileWork.img }}" alt="{{ currentMobileWork.category }}" onClick="{{ currentMobileWork.onOpen }}" loading="lazy" style="object-position:center 25%;" />
-        </sc-if>
-        <sc-if value="{{ currentMobileWork.hasImgNot }}" hint-placeholder-val="{{ true }}">
-          <div class="placeholder-fill">{{ currentMobileWork.placeholder }}</div>
-        </sc-if>
+        <img src="{{ currentMobileWork.img }}" alt="Tatuagem em estilo {{ currentMobileWork.category }}" onClick="{{ currentMobileWork.onOpen }}" onKeyDown="{{ currentMobileWork.onKeyDown }}" role="button" tabindex="0" loading="lazy" style="object-position:center 25%;" />
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;">
         <div>
@@ -424,7 +474,7 @@
     <div style="margin-top:16px;font-family:var(--font-serif);font-weight:400;font-size:clamp(26px,3.6vw,40px);line-height:1.2;color:var(--ink);">
       Meu trabalho é transformar isso<br/>em algo <em style="font-style:italic;">único.</em>
     </div>
-    <div style="margin-top:24px;font-family:var(--font-serif);font-style:italic;font-size:clamp(22px,2.8vw,30px);color:var(--accent);">— Lucas Reis</div>
+    <div style="margin-top:24px;font-family:var(--font-serif);font-style:italic;font-size:clamp(22px,2.8vw,30px);color:var(--accent-deep);">— Lucas Reis</div>
   </div>
 </section>
 
@@ -434,7 +484,7 @@
     <div class="eyebrow">01 — O ARTISTA</div>
   </div>
   <div class="artista-grid">
-    <div data-reveal-id="artista-image" class="img-frame" style="{{ artistaImageStyle }}"><img src="./img/artista-estudio.webp" alt="Lucas Reis no estúdio" onClick="{{ artistaLightboxOpen }}" loading="lazy" style="object-position:center 20%;" /></div>
+    <div data-reveal-id="artista-image" class="img-frame" style="{{ artistaImageStyle }}"><img src="./img/artista-estudio.webp" alt="Retrato de Lucas Reis no estúdio" onClick="{{ artistaLightboxOpen }}" onKeyDown="{{ artistaLightboxKey }}" role="button" tabindex="0" aria-label="Ampliar retrato de Lucas Reis" loading="lazy" style="object-position:center 20%;" /></div>
     <div style="position:relative;display:flex;flex-direction:column;gap:20px;justify-content:center;">
       <div style="position:absolute;top:-30px;right:0;font-family:var(--font-serif);font-size:clamp(110px,15vw,190px);color:rgba(238,234,226,0.045);line-height:1;z-index:0;">01</div>
       <h2 style="position:relative;margin:0;font-family:var(--font-serif);font-weight:500;font-size:clamp(34px,4.6vw,50px);color:var(--off-white);line-height:1.02;">Lucas<br/>Reis.</h2>
@@ -454,22 +504,17 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,48px);align-items:start;max-width:1240px;margin:0 auto;">
     <div>
       <sc-for list="{{ estilos }}" as="est" hint-placeholder-count="4">
-        <div class="style-row" onMouseEnter="{{ est.onEnter }}">
+        <button type="button" class="style-row" onMouseEnter="{{ est.onEnter }}" onClick="{{ est.onEnter }}" aria-pressed="{{ est.isActive }}">
           <div style="display:flex;align-items:baseline;gap:20px;">
             <span class="meta-tag">{{ est.num }}</span>
             <span class="style-name">{{ est.name }}</span>
           </div>
           <span class="style-arrow">→</span>
-        </div>
+        </button>
       </sc-for>
     </div>
     <div class="img-frame img-frame--md" style="position:sticky;top:100px;width:min(340px,100%);aspect-ratio:4/5;margin:0 auto;">
-      <sc-if value="{{ activeEstiloHasImg }}" hint-placeholder-val="{{ false }}">
-        <img src="{{ activeEstiloImg }}" alt="{{ activeEstiloName }}" onClick="{{ activeEstiloOpen }}" loading="lazy" style="object-position:42% 38%;" />
-      </sc-if>
-      <sc-if value="{{ activeEstiloHasImgNot }}" hint-placeholder-val="{{ true }}">
-        <div class="placeholder-fill" style="transition:background .4s ease;">TATTOO — {{ activeEstiloName }}</div>
-      </sc-if>
+      <img src="{{ activeEstiloImg }}" alt="Tatuagem em estilo {{ activeEstiloName }}" onClick="{{ activeEstiloOpen }}" onKeyDown="{{ activeEstiloKey }}" role="button" tabindex="0" aria-label="Ampliar exemplo de {{ activeEstiloName }}" loading="lazy" style="object-position:42% 38%;" />
     </div>
   </div>
 </section>
@@ -483,17 +528,16 @@
       <button class="icon-btn" onClick="{{ galeriaScrollNext }}" aria-label="Próxima">→</button>
     </div>
   </div>
-  <div class="gallery-track" ref="{{ galeriaRef }}">
+  <div class="gallery-track" ref="{{ galeriaRef }}" onTouchStart="{{ galeriaTouchStart }}" onTouchEnd="{{ galeriaTouchEnd }}" role="list" aria-label="Galeria de tatuagens">
     <sc-for list="{{ galeria }}" as="g" hint-placeholder-count="6">
-      <div class="gallery-card">
-        <div class="img-frame img-frame--md" data-reveal-id="galeria-{{ $index }}" style="{{ g.style }}" onClick="{{ g.onOpen }}">
-          <sc-if value="{{ g.hasImg }}" hint-placeholder-val="{{ false }}">
-            <img src="{{ g.img }}" alt="{{ g.caption }}" loading="lazy" style="object-position:center 20%;" />
-          </sc-if>
-          <sc-if value="{{ g.hasImgNot }}" hint-placeholder-val="{{ true }}">
-            <div class="placeholder-fill">{{ g.placeholder }}</div>
-          </sc-if>
-        </div>
+      <div class="gallery-card" data-reveal-id="galeria-{{ $index }}" data-side="{{ g.side }}" style="{{ g.style }}" aria-current="{{ g.isActive }}" onMouseEnter="{{ g.onEnter }}" onClick="{{ g.onClick }}" onFocus="{{ g.onEnter }}" onKeyDown="{{ g.onKeyDown }}" role="listitem" tabindex="0" aria-label="Selecionar ou abrir {{ g.caption }}">
+        <span class="gallery-card__frame">
+          <span class="gallery-card__media">
+            <img class="gallery-card__backdrop" src="{{ g.img }}" alt="" aria-hidden="true" loading="lazy" draggable="false" />
+            <img class="gallery-card__image" src="{{ g.img }}" alt="{{ g.caption }}" loading="lazy" style="object-position:center 20%;" draggable="false" />
+          </span>
+          <span class="gallery-card__overlay" aria-hidden="true"></span>
+        </span>
       </div>
     </sc-for>
   </div>
@@ -517,7 +561,7 @@
     </sc-for>
   </div>
   <div style="display:flex;justify-content:flex-end;margin-top:clamp(28px,4vw,40px);">
-    <a href="{{ waLink }}" target="_blank" class="link-underline">COMEÇAR MEU PROJETO →</a>
+    <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" class="link-underline">COMEÇAR MEU PROJETO →</a>
   </div>
 </section>
 
@@ -526,7 +570,7 @@
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
     <div class="studio-composition">
       <div class="img-frame img-frame--md studio-composition-image">
-        <img src="./img/estudio-ambiente.webp" alt="Ambiente do estúdio" onClick="{{ estudioLightboxOpen }}" loading="lazy" style="object-position:center 40%;" />
+        <img src="./img/estudio-ambiente.webp" alt="Ambiente interno do estúdio Lucas Reis Tattoo" onClick="{{ estudioLightboxOpen }}" onKeyDown="{{ estudioLightboxKey }}" role="button" tabindex="0" aria-label="Ampliar foto do estúdio" loading="lazy" style="object-position:center 40%;" />
       </div>
       <div style="display:flex;flex-direction:column;justify-content:center;gap:18px;">
         <h2 class="h2">Um espaço preparado<br/>para sua experiência.</h2>
@@ -539,7 +583,7 @@
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;padding-top:20px;border-top:1px solid var(--hair);">
           <div class="eyebrow">ONDE ESTAMOS</div>
           <div style="font-family:var(--font-serif);font-weight:500;font-size:clamp(19px,2vw,23px);color:var(--off-white);line-height:1.3;">Av. Sete de Setembro<br/>Matozinhos, São João del Rei — MG</div>
-          <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" class="btn btn-outline" style="width:fit-content;margin-top:6px;">COMO CHEGAR (GOOGLE MAPS) ↗</a>
+          <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width:fit-content;margin-top:6px;">COMO CHEGAR (GOOGLE MAPS) ↗</a>
         </div>
       </div>
     </div>
@@ -547,7 +591,7 @@
 
   <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
     <div style="position:relative;width:100%;height:min(400px,48vh);border-radius:var(--radius-lg);overflow:hidden;display:flex;align-items:flex-end;padding:clamp(24px,4vw,44px);">
-      <img src="./img/estudio-ambiente.webp" alt="Ambiente do estúdio" onClick="{{ estudioLightboxOpen }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;cursor:pointer;" />
+      <img src="./img/estudio-ambiente.webp" alt="Ambiente interno do estúdio Lucas Reis Tattoo" onClick="{{ estudioLightboxOpen }}" onKeyDown="{{ estudioLightboxKey }}" role="button" tabindex="0" aria-label="Ampliar foto do estúdio" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;cursor:pointer;" />
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.85),rgba(11,11,11,0) 55%);"></div>
       <h2 class="h2" style="position:relative;max-width:600px;">Um espaço preparado<br/>para sua experiência.</h2>
     </div>
@@ -566,7 +610,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div class="eyebrow">ONDE ESTAMOS</div>
         <div style="font-family:var(--font-serif);font-weight:500;font-size:clamp(20px,2.4vw,26px);color:var(--off-white);line-height:1.3;">Av. Sete de Setembro<br/>Matozinhos, São João del Rei — MG</div>
-        <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" class="link-underline" style="width:fit-content;">COMO CHEGAR (GOOGLE MAPS) →</a>
+        <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" rel="noopener noreferrer" class="link-underline" style="width:fit-content;">COMO CHEGAR (GOOGLE MAPS) →</a>
       </div>
     </div>
   </sc-if>
@@ -581,14 +625,16 @@
   <div style="max-width:820px;margin:0 auto;">
     <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="5">
       <div class="faq-row">
-        <div onClick="{{ faq.onToggle }}" class="faq-head">
+        <button type="button" onClick="{{ faq.onToggle }}" class="faq-head" aria-expanded="{{ faq.isOpen }}" aria-controls="faq-answer-{{ $index }}">
           <div style="display:flex;align-items:baseline;gap:20px;">
             <span class="meta-tag">{{ faq.num }}</span>
             <span class="faq-question">{{ faq.question }}</span>
           </div>
           <span class="faq-symbol" style="{{ faq.symbolStyle }}">+</span>
+        </button>
+        <div class="faq-answer-wrap" style="{{ faq.answerStyle }}" aria-hidden="{{ faq.isClosed }}">
+          <p id="faq-answer-{{ $index }}" class="body-text faq-answer">{{ faq.answer }}</p>
         </div>
-        <p class="body-text faq-answer" style="{{ faq.answerStyle }}">{{ faq.answer }}</p>
       </div>
     </sc-for>
   </div>
@@ -601,7 +647,7 @@
     <div style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.1em;color:var(--text-secondary);">@LUCASREIS_TATTOO</div>
   </div>
   <div style="display:flex;justify-content:center;margin-top:12px;">
-    <a href="https://instagram.com/lucasreis_tattoo" target="_blank" class="link-underline">SEGUIR NO INSTAGRAM ↗</a>
+    <a href="https://instagram.com/lucasreis_tattoo" target="_blank" rel="noopener noreferrer" class="link-underline">SEGUIR NO INSTAGRAM ↗</a>
   </div>
 </section>
 
@@ -609,8 +655,9 @@
 <section id="contato" style="background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(64px,8vw,100px) clamp(20px,6vw,80px);gap:26px;">
   <h2 data-reveal-id="cta-final" style="{{ ctaFinalStyle }}">Tem uma <em style="font-style:italic;">ideia?</em><br/>Vamos tirar do papel.</h2>
   <p class="body-text" style="max-width:440px;font-size:16px;">Conte sua ideia, região do corpo e envie suas referências.</p>
-  <a href="{{ waLink }}" target="_blank" class="btn btn-solid btn-lg">FALAR COM LUCAS NO WHATSAPP ↗</a>
+  <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-lg">FALAR COM LUCAS NO WHATSAPP ↗</a>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer style="background:var(--bg);border-top:1px solid var(--hair);padding:clamp(40px,6vw,64px) clamp(20px,6vw,80px) clamp(24px,4vw,36px);display:flex;flex-direction:column;gap:40px;">
@@ -621,9 +668,9 @@
       <div style="font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);">São João del Rei — MG</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
-      <a href="https://instagram.com/lucasreis_tattoo" target="_blank" style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.06em;color:var(--text-secondary);">Instagram</a>
-      <a href="{{ waLink }}" target="_blank" style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.06em;color:var(--text-secondary);">WhatsApp</a>
-      <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.06em;color:var(--text-secondary);">Google Maps</a>
+      <a href="https://instagram.com/lucasreis_tattoo" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.06em;color:var(--text-secondary);">Instagram</a>
+      <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.06em;color:var(--text-secondary);">WhatsApp</a>
+      <a href="https://www.google.com/maps/place/Est%C3%BAdio+Lucas+Nascimento+Tattoo/data=!4m2!3m1!1s0x0:0x956121394151c44f?sa=X&ved=1t:2428&ictx=111" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-sans);font-size:13px;letter-spacing:0.06em;color:var(--text-secondary);">Google Maps</a>
     </div>
   </div>
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--hair);padding-top:20px;">
@@ -634,19 +681,19 @@
 
 <!-- WHATSAPP FIXED -->
 <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <a href="{{ waLink }}" target="_blank" class="wa-fab" aria-label="Falar no WhatsApp">
+  <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="Falar no WhatsApp">
     <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.004 0C7.163 0 0 7.163 0 16c0 2.82.738 5.577 2.14 8.008L.06 32l8.2-2.15A15.9 15.9 0 0 0 16.004 32C24.84 32 32 24.837 32 16S24.84 0 16.004 0zm0 29.09c-2.5 0-4.945-.673-7.08-1.948l-.508-.303-4.868 1.276 1.3-4.744-.33-.487A12.98 12.98 0 0 1 2.91 16C2.91 8.77 8.77 2.91 16 2.91S29.09 8.77 29.09 16 23.234 29.09 16.004 29.09zm7.15-9.65c-.39-.196-2.31-1.14-2.668-1.27-.358-.13-.618-.196-.878.196-.26.39-1.006 1.27-1.234 1.53-.227.26-.454.293-.845.098-.39-.196-1.646-.606-3.135-1.933-1.16-1.034-1.943-2.312-2.17-2.702-.227-.39-.024-.6.17-.795.176-.174.39-.454.585-.68.196-.227.26-.39.39-.65.13-.26.065-.487-.033-.682-.098-.196-.878-2.118-1.203-2.902-.316-.76-.638-.656-.878-.668l-.748-.013c-.26 0-.682.098-1.04.487-.358.39-1.365 1.334-1.365 3.253 0 1.92 1.397 3.774 1.593 4.034.196.26 2.75 4.2 6.665 5.888.932.402 1.658.642 2.225.822.935.298 1.786.256 2.46.155.75-.112 2.31-.944 2.636-1.856.326-.912.326-1.694.228-1.856-.098-.163-.358-.26-.748-.456z"/></svg>
   </a>
 </sc-if>
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-  <a href="{{ waLink }}" target="_blank" style="position:fixed;bottom:16px;left:16px;right:16px;background:var(--off-white);color:var(--ink);text-align:center;padding:15px;border-radius:var(--radius-md);font-family:var(--font-sans);font-size:12px;letter-spacing:0.06em;font-weight:700;z-index:300;box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;gap:10px;">
+  <a href="{{ waLink }}" target="_blank" rel="noopener noreferrer" style="position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:16px;right:16px;background:var(--off-white);color:var(--ink);text-align:center;padding:15px;border-radius:var(--radius-md);font-family:var(--font-sans);font-size:12px;letter-spacing:0.06em;font-weight:700;z-index:300;box-shadow:0 10px 30px rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;gap:10px;">
     <svg class="wa-bar-icon" viewBox="0 0 32 32" fill="#25D366"><path d="M16.004 0C7.163 0 0 7.163 0 16c0 2.82.738 5.577 2.14 8.008L.06 32l8.2-2.15A15.9 15.9 0 0 0 16.004 32C24.84 32 32 24.837 32 16S24.84 0 16.004 0zm0 29.09c-2.5 0-4.945-.673-7.08-1.948l-.508-.303-4.868 1.276 1.3-4.744-.33-.487A12.98 12.98 0 0 1 2.91 16C2.91 8.77 8.77 2.91 16 2.91S29.09 8.77 29.09 16 23.234 29.09 16.004 29.09zm7.15-9.65c-.39-.196-2.31-1.14-2.668-1.27-.358-.13-.618-.196-.878.196-.26.39-1.006 1.27-1.234 1.53-.227.26-.454.293-.845.098-.39-.196-1.646-.606-3.135-1.933-1.16-1.034-1.943-2.312-2.17-2.702-.227-.39-.024-.6.17-.795.176-.174.39-.454.585-.68.196-.227.26-.39.39-.65.13-.26.065-.487-.033-.682-.098-.196-.878-2.118-1.203-2.902-.316-.76-.638-.656-.878-.668l-.748-.013c-.26 0-.682.098-1.04.487-.358.39-1.365 1.334-1.365 3.253 0 1.92 1.397 3.774 1.593 4.034.196.26 2.75 4.2 6.665 5.888.932.402 1.658.642 2.225.822.935.298 1.786.256 2.46.155.75-.112 2.31-.944 2.636-1.856.326-.912.326-1.694.228-1.856-.098-.163-.358-.26-.748-.456z"/></svg>
     SOLICITAR ORÇAMENTO NO WHATSAPP
   </a>
 </sc-if>
 
 <sc-if value="{{ isLightboxOpen }}" hint-placeholder-val="{{ false }}">
-  <div class="lightbox-backdrop" onClick="{{ closeLightbox }}">
+  <div class="lightbox-backdrop" onClick="{{ closeLightbox }}" role="dialog" aria-modal="true" aria-label="Visualização ampliada da fotografia">
     <button class="lightbox-close" onClick="{{ closeLightbox }}" aria-label="Fechar">×</button>
     <sc-if value="{{ lightboxHasMultiple }}" hint-placeholder-val="{{ false }}">
       <button class="lightbox-arrow lightbox-arrow-left" onClick="{{ lightboxPrevClick }}" aria-label="Anterior">←</button>
@@ -667,6 +714,7 @@ class Component extends DCLogic {
     mobileMenuOpen: false,
     activeEstilo: 0,
     activeWork: 0,
+    activeGallery: 2,
     openFaq: 0,
     workIndex: 0,
     revealed: {},
@@ -688,7 +736,7 @@ class Component extends DCLogic {
     return {
       opacity: on ? 1 : 0,
       transform: on ? 'scale(1)' : 'scale(0.4)',
-      transition: 'opacity .4s ease ' + (delayMs || 0) + 'ms, transform .7s cubic-bezier(0.34,1.56,0.64,1) ' + (delayMs || 0) + 'ms'
+      transition: 'opacity .4s ease ' + (delayMs || 0) + 'ms, transform .65s cubic-bezier(0.16,1,0.3,1) ' + (delayMs || 0) + 'ms'
     };
   }
 
@@ -754,14 +802,18 @@ class Component extends DCLogic {
 
   toggleMobileMenu = () => {
     const next = !this.state.mobileMenuOpen;
+    if (next) this._returnFocus = document.activeElement;
     document.body.classList.toggle('menu-open', next);
     document.body.style.overflow = next ? 'hidden' : '';
     this.setState({ mobileMenuOpen: next });
+    if (next) setTimeout(() => document.querySelector('.mobile-menu-close')?.focus(), 0);
+    else setTimeout(() => document.querySelector('button[aria-label="Abrir menu"]')?.focus(), 0);
   };
   closeMenu = () => {
     document.body.classList.remove('menu-open');
     document.body.style.overflow = '';
     this.setState({ mobileMenuOpen: false });
+    setTimeout(() => document.querySelector('button[aria-label="Abrir menu"]')?.focus(), 0);
   };
 
   setActiveEstilo(i) { this.setState({ activeEstilo: i }); }
@@ -783,15 +835,39 @@ class Component extends DCLogic {
     const list = (Array.isArray(images) ? images : [images]).filter(Boolean);
     if (!list.length) return;
     const safeIndex = Math.min(Math.max(index || 0, 0), list.length - 1);
+    this._returnFocus = document.activeElement;
     document.body.style.overflow = 'hidden';
     this.setState({ lightboxImages: list, lightboxIndex: safeIndex });
+    setTimeout(() => document.querySelector('.lightbox-close')?.focus(), 0);
   };
-  closeLightbox = () => { document.body.style.overflow = ''; this.setState({ lightboxImages: [], lightboxIndex: 0 }); };
+  closeLightbox = () => {
+    document.body.style.overflow = '';
+    this.setState({ lightboxImages: [], lightboxIndex: 0 });
+    setTimeout(() => {
+      if (this._returnFocus?.isConnected) this._returnFocus.focus();
+      else document.getElementById('main-content')?.focus();
+    }, 0);
+  };
   lightboxNext = () => this.setState((s) => ({ lightboxIndex: (s.lightboxIndex + 1) % s.lightboxImages.length }));
   lightboxPrev = () => this.setState((s) => ({ lightboxIndex: (s.lightboxIndex - 1 + s.lightboxImages.length) % s.lightboxImages.length }));
   lightboxNextClick = (e) => { e.stopPropagation(); this.lightboxNext(); };
   lightboxPrevClick = (e) => { e.stopPropagation(); this.lightboxPrev(); };
   stopClick = (e) => e.stopPropagation();
+  keyActivate = (action) => (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    action();
+  };
+
+  trapFocus(e, selector) {
+    if (e.key !== 'Tab') return;
+    const root = document.querySelector(selector);
+    const items = root ? Array.from(root.querySelectorAll('a[href],button:not([disabled]),[tabindex="0"]')).filter((el) => el.offsetParent !== null) : [];
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
 
   lightboxDragStart = (e) => {
     this._lbDragging = true;
@@ -814,8 +890,27 @@ class Component extends DCLogic {
   };
 
   galeriaRef = (el) => { this._galeriaEl = el; };
-  galeriaScrollPrev = () => { if (this._galeriaEl) this._galeriaEl.scrollBy({ left: -360, behavior: 'smooth' }); };
-  galeriaScrollNext = () => { if (this._galeriaEl) this._galeriaEl.scrollBy({ left: 360, behavior: 'smooth' }); };
+  setActiveGallery = (i) => {
+    const total = this.galeria.filter((g) => g.img).length;
+    if (!total) return;
+    this.setState({ activeGallery: (i + total) % total });
+  };
+  galeriaScrollPrev = () => this.setActiveGallery(this.state.activeGallery - 1);
+  galeriaScrollNext = () => this.setActiveGallery(this.state.activeGallery + 1);
+  galeriaTouchStart = (e) => {
+    this._galleryTouchX = e.touches[0].clientX;
+    this._galleryTouchY = e.touches[0].clientY;
+  };
+  galeriaTouchEnd = (e) => {
+    if (this._galleryTouchX == null || this._galleryTouchY == null) return;
+    const dx = e.changedTouches[0].clientX - this._galleryTouchX;
+    const dy = e.changedTouches[0].clientY - this._galleryTouchY;
+    this._galleryTouchX = null;
+    this._galleryTouchY = null;
+    const delta = Math.abs(dx) > Math.abs(dy) ? dx : dy;
+    if (Math.abs(delta) < 50) return;
+    if (delta > 0) this.galeriaScrollPrev(); else this.galeriaScrollNext();
+  };
 
   cursorRef = (el) => { this._cursorEl = el; };
   onWorkMouseMove = (e) => {
@@ -835,10 +930,15 @@ class Component extends DCLogic {
 
   handleKeyDown = (e) => {
     if (this.state.lightboxImages.length) {
+      if (e.key === 'Tab') { this.trapFocus(e, '.lightbox-backdrop'); return; }
       if (e.key === 'Escape') { this.closeLightbox(); return; }
       if (e.key === 'ArrowLeft') { e.preventDefault(); this.lightboxPrev(); return; }
       if (e.key === 'ArrowRight') { e.preventDefault(); this.lightboxNext(); return; }
       return;
+    }
+    if (this.state.mobileMenuOpen) {
+      if (e.key === 'Tab') { this.trapFocus(e, '.mobile-menu-overlay'); return; }
+      if (e.key === 'Escape') { this.closeMenu(); return; }
     }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       const el = this._galeriaEl;
@@ -883,13 +983,40 @@ class Component extends DCLogic {
     const waLink = 'https://wa.me/' + phone + '?text=' + msg;
 
     const galeriaImages = this.galeria.map((g) => g.img).filter(Boolean);
-    const galeria = this.galeria.map((g, i) => ({
+    const galeria = this.galeria.filter((g) => g.img).map((g, i) => {
+      const onOpen = () => this.openLightbox(galeriaImages, galeriaImages.indexOf(g.img));
+      const isActive = this.state.activeGallery === i;
+      const onEnter = () => this.setActiveGallery(i);
+      const onClick = () => {
+        if (this.state.activeGallery === i) onOpen();
+        else this.setActiveGallery(i);
+      };
+      const onKeyDown = (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          e.stopPropagation();
+          this.setActiveGallery(i + (e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 1));
+          return;
+        }
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        if (this.state.activeGallery === i) onOpen();
+        else this.setActiveGallery(i);
+      };
+      return {
       ...g,
-      hasImg: !!g.img,
-      hasImgNot: !g.img,
-      onOpen: g.img ? () => this.openLightbox(galeriaImages, galeriaImages.indexOf(g.img)) : undefined,
-      style: this.revealBounce('galeria-' + i, i * 90)
-    }));
+      isActive,
+      side: i < this.state.activeGallery ? 'left' : (i > this.state.activeGallery ? 'right' : 'active'),
+      onEnter,
+      onClick,
+      onKeyDown,
+      style: {
+        opacity: this.state.revealed['galeria-' + i] ? 1 : 0,
+        '--ag-shift': Math.max(-1.5, Math.min(1.5, this.state.activeGallery - i)) * 18 + 'px',
+        transitionDelay: this.state.revealed['galeria-' + i] ? i * 45 + 'ms' : '0ms'
+      }
+      };
+    });
 
     const processoSteps = this.processoSteps.map((step, i) => ({
       ...step,
@@ -899,6 +1026,7 @@ class Component extends DCLogic {
     const estilos = this.estilosData.map((name, i) => ({
       num: '0' + (i + 1),
       name,
+      isActive: this.state.activeEstilo === i,
       onEnter: () => this.setActiveEstilo(i)
     }));
 
@@ -909,24 +1037,25 @@ class Component extends DCLogic {
         question: f.question,
         answer: f.answer,
         isOpen,
-        answerStyle: { maxWidth: '600px', maxHeight: isOpen ? '400px' : '0px', opacity: isOpen ? 1 : 0, transform: isOpen ? 'translateY(0)' : 'translateY(-6px)', paddingBottom: isOpen ? '28px' : '0px' },
+        isClosed: !isOpen,
+        answerStyle: { maxWidth: '600px', gridTemplateRows: isOpen ? '1fr' : '0fr', opacity: isOpen ? 1 : 0 },
         symbolStyle: { transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' },
         onToggle: () => this.toggleFaq(i)
       };
     });
 
     const workImages = this.works.map((w) => w.img).filter(Boolean);
-    const works = this.works.map((w) => ({ ...w, hasImg: !!w.img, hasImgNot: !w.img, onOpen: w.img ? () => this.openLightbox(workImages, workImages.indexOf(w.img)) : undefined }));
     const activeWork = this.works[this.state.activeWork] || this.works[0];
-    const worksListItems = this.works.map((w, i) => ({ ...w, onEnter: () => this.setActiveWork(i) }));
+    const worksListItems = this.works.map((w, i) => ({ ...w, isActive: this.state.activeWork === i, onEnter: () => this.setActiveWork(i) }));
 
-    const depoimentos = this.depoimentosData.map((img) => ({
-      img,
-      onOpen: () => this.openLightbox(this.depoimentosData, this.depoimentosData.indexOf(img))
-    }));
+    const depoimentos = this.depoimentosData.map((img, i) => {
+      const onOpen = () => this.openLightbox(this.depoimentosData, i);
+      return { img, alt: 'Depoimento de cliente ' + (i + 1), onOpen, onKeyDown: this.keyActivate(onOpen) };
+    });
     const mwRaw = this.mobileWorks[this.state.workIndex];
     const mobileWorkImages = this.mobileWorks.map((m) => m.img).filter(Boolean);
-    const mw = { ...mwRaw, hasImg: !!mwRaw.img, hasImgNot: !mwRaw.img, onOpen: mwRaw.img ? () => this.openLightbox(mobileWorkImages, mobileWorkImages.indexOf(mwRaw.img)) : undefined };
+    const mobileWorkOpen = mwRaw.img ? () => this.openLightbox(mobileWorkImages, mobileWorkImages.indexOf(mwRaw.img)) : undefined;
+    const mw = { ...mwRaw, onOpen: mobileWorkOpen, onKeyDown: this.keyActivate(mobileWorkOpen) };
 
     return {
       isMobile: this.state.isMobile,
@@ -961,13 +1090,13 @@ class Component extends DCLogic {
       onWorkMouseMove: this.onWorkMouseMove,
       onWorkMouseEnter: this.onWorkMouseEnter,
       onWorkMouseLeave: this.onWorkMouseLeave,
-      works,
       worksListItems,
       activeWorkImg: activeWork.img,
       activeWorkCategory: activeWork.category,
       activeWorkYear: activeWork.year,
       activeWorkNum: activeWork.num,
       activeWorkOpen: activeWork.img ? () => this.openLightbox(workImages, workImages.indexOf(activeWork.img)) : undefined,
+      activeWorkKey: activeWork.img ? this.keyActivate(() => this.openLightbox(workImages, workImages.indexOf(activeWork.img))) : undefined,
       currentMobileWork: mw,
       mobileWorkCounter: '0' + (this.state.workIndex + 1) + ' / 0' + this.mobileWorks.length,
       onWorkTouchStart: this.onWorkTouchStart,
@@ -977,9 +1106,8 @@ class Component extends DCLogic {
       estilos,
       activeEstiloName: this.estilosData[this.state.activeEstilo],
       activeEstiloImg: this.estilosImg[this.state.activeEstilo],
-      activeEstiloHasImg: !!this.estilosImg[this.state.activeEstilo],
-      activeEstiloHasImgNot: !this.estilosImg[this.state.activeEstilo],
       activeEstiloOpen: this.estilosImg[this.state.activeEstilo] ? () => this.openLightbox([this.estilosImg[this.state.activeEstilo]], 0) : undefined,
+      activeEstiloKey: this.estilosImg[this.state.activeEstilo] ? this.keyActivate(() => this.openLightbox([this.estilosImg[this.state.activeEstilo]], 0)) : undefined,
       confiancaItems: this.confiancaItems,
       depoimentos,
       faqs,
@@ -996,9 +1124,14 @@ class Component extends DCLogic {
       galeriaRef: this.galeriaRef,
       galeriaScrollPrev: this.galeriaScrollPrev,
       galeriaScrollNext: this.galeriaScrollNext,
+      galeriaTouchStart: this.galeriaTouchStart,
+      galeriaTouchEnd: this.galeriaTouchEnd,
       heroLightboxOpen: () => this.openLightbox(['./img/hero-tattooing.webp'], 0),
+      heroLightboxKey: this.keyActivate(() => this.openLightbox(['./img/hero-tattooing.webp'], 0)),
       artistaLightboxOpen: () => this.openLightbox(['./img/artista-estudio.webp'], 0),
-      estudioLightboxOpen: () => this.openLightbox(['./img/estudio-ambiente.webp'], 0)
+      artistaLightboxKey: this.keyActivate(() => this.openLightbox(['./img/artista-estudio.webp'], 0)),
+      estudioLightboxOpen: () => this.openLightbox(['./img/estudio-ambiente.webp'], 0),
+      estudioLightboxKey: this.keyActivate(() => this.openLightbox(['./img/estudio-ambiente.webp'], 0))
     };
   }
 }
@@ -1107,29 +1240,49 @@ class Component extends DCLogic {
       canvas.style.width = '100%';
       canvas.style.height = '100%';
     };
-    window.addEventListener('resize', resize);
-    if (window.ResizeObserver) new ResizeObserver(resize).observe(parent);
+    window.addEventListener('resize', resize, { passive: true });
+    const resizeObserver = window.ResizeObserver ? new ResizeObserver(resize) : null;
+    resizeObserver?.observe(parent);
     resize();
 
     const start = performance.now();
     let frame;
+    let heroVisible = true;
+    let pageVisible = !document.hidden;
+    const visibilityObserver = window.IntersectionObserver ? new IntersectionObserver(([entry]) => {
+      heroVisible = entry.isIntersecting;
+    }, { rootMargin: '120px' }) : null;
+    visibilityObserver?.observe(parent);
+    const onVisibilityChange = () => { pageVisible = !document.hidden; };
+    document.addEventListener('visibilitychange', onVisibilityChange);
     const loop = () => {
-      if (!canvas.isConnected) { cancelAnimationFrame(frame); return; }
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
-      renderer.render({ scene: mesh });
+      if (!canvas.isConnected) return;
+      if (heroVisible && pageVisible) {
+        program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
+        renderer.render({ scene: mesh });
+      }
       frame = requestAnimationFrame(loop);
     };
     loop();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      resizeObserver?.disconnect();
+      visibilityObserver?.disconnect();
+    };
   }
 
   function boot() {
     let activeCanvas = null;
+    let cleanupActive = null;
     const tryInit = () => {
       const canvas = document.getElementById('hero-darkveil');
       if (canvas && canvas !== activeCanvas) {
+        cleanupActive?.();
         activeCanvas = canvas;
         try {
-          initDarkVeil(canvas, {
+          cleanupActive = initDarkVeil(canvas, {
             hueShift: 236,
             noiseIntensity: 0.04,
             scanlineIntensity: 0.06,
@@ -1146,10 +1299,7 @@ class Component extends DCLogic {
     tryInit();
     [100, 300, 600, 1000, 1800, 3000].forEach((ms) => setTimeout(tryInit, ms));
     if (window.MutationObserver) {
-      const heroSection = document.getElementById('top');
-      if (heroSection) {
-        new MutationObserver(tryInit).observe(heroSection, { childList: true, subtree: true });
-      }
+      new MutationObserver(tryInit).observe(document.body, { childList: true, subtree: true });
     }
   }
   if (document.readyState === 'loading') {

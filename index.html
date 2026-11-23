@@ -86,6 +86,8 @@
   .band--tight { padding-top: clamp(48px, 5vw, 64px); padding-bottom: clamp(48px, 5vw, 64px); }
   .band--alt { background: var(--bg-alt); }
   .band--paper { background: var(--paper); color: var(--ink); }
+  /* Processo: fumaça vermelha no canto inferior esquerdo, com um véu preto leve por cima. */
+  .band--smoke { background-color: #050505; background-image: linear-gradient(to bottom, var(--bg) 0, rgba(10,9,9,0) 56px, rgba(10,9,9,0) calc(100% - 72px), var(--bg) 100%), linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./img/processo-bg.webp'); background-size: cover; background-position: left bottom; background-repeat: no-repeat; }
   @media (max-width: 899px) {
     .band { padding: 56px 20px; }
     .band--tight { padding-top: 44px; padding-bottom: 48px; }
@@ -706,7 +708,7 @@
 </section>
 
 <!-- PROCESSO -->
-<section id="processo" class="band band--alt">
+<section id="processo" class="band band--smoke">
   <div class="sec-head">
     <div>
       <div class="label label--red label--tick">Processo</div>

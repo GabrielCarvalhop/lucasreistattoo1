@@ -385,7 +385,7 @@
   .wa-bar-icon { width: 20px; height: 20px; flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(37,211,102,0.9)) drop-shadow(0 0 14px rgba(37,211,102,0.5)); }
 
   /* ---------- Lightbox ---------- */
-  .lightbox-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(8,8,8,0.88); backdrop-filter: blur(16px) saturate(1.1); display: flex; align-items: center; justify-content: center; padding: 40px; animation: lightboxFade .25s ease; }
+  .lightbox-backdrop { position: fixed; inset: 0; z-index: 1000; overscroll-behavior: contain; touch-action: none; background: rgba(8,8,8,0.88); backdrop-filter: blur(16px) saturate(1.1); display: flex; align-items: center; justify-content: center; padding: 40px; animation: lightboxFade .25s ease; }
   @keyframes lightboxFade { from { opacity: 0; } to { opacity: 1; } }
   .lightbox-img { max-width: min(1100px,92vw); max-height: 88vh; object-fit: contain; border-radius: 8px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); animation: lightboxZoom .35s var(--ease-out); cursor: grab; user-select: none; -webkit-user-drag: none; touch-action: pan-y; }
   .lightbox-img:active { cursor: grabbing; }
@@ -974,18 +974,26 @@ class Component extends DCLogic {
     { question: 'Quanto tempo dura uma sessão?', answer: 'Depende do tamanho e complexidade do projeto. Isso é definido durante o orçamento.' }
   ];
 
+  // Trava a rolagem do fundo sem mexer na posição da página (travar pelo body fazia a página pular para o topo).
+  lockScroll(on) {
+    const root = document.documentElement;
+    const gap = on ? window.innerWidth - root.clientWidth : 0;
+    root.style.overflow = on ? 'hidden' : '';
+    document.body.style.paddingRight = gap > 0 ? gap + 'px' : '';
+  }
+
   toggleMobileMenu = () => {
     const next = !this.state.mobileMenuOpen;
     if (next) this._returnFocus = document.activeElement;
     document.body.classList.toggle('menu-open', next);
-    document.body.style.overflow = next ? 'hidden' : '';
+    this.lockScroll(next);
     this.setState({ mobileMenuOpen: next });
     if (next) setTimeout(() => document.querySelector('.mobile-menu-close')?.focus(), 0);
     else setTimeout(() => document.querySelector('button[aria-label="Abrir menu"]')?.focus(), 0);
   };
   closeMenu = () => {
     document.body.classList.remove('menu-open');
-    document.body.style.overflow = '';
+    this.lockScroll(false);
     this.setState({ mobileMenuOpen: false });
     setTimeout(() => document.querySelector('button[aria-label="Abrir menu"]')?.focus(), 0);
   };
@@ -1010,16 +1018,16 @@ class Component extends DCLogic {
     if (!list.length) return;
     const safeIndex = Math.min(Math.max(index || 0, 0), list.length - 1);
     this._returnFocus = document.activeElement;
-    document.body.style.overflow = 'hidden';
+    this.lockScroll(true);
     this.setState({ lightboxImages: list, lightboxIndex: safeIndex });
     setTimeout(() => document.querySelector('.lightbox-close')?.focus(), 0);
   };
   closeLightbox = () => {
-    document.body.style.overflow = '';
+    this.lockScroll(false);
     this.setState({ lightboxImages: [], lightboxIndex: 0 });
     setTimeout(() => {
-      if (this._returnFocus?.isConnected) this._returnFocus.focus();
-      else document.getElementById('main-content')?.focus();
+      if (this._returnFocus?.isConnected) this._returnFocus.focus({ preventScroll: true });
+      else document.getElementById('main-content')?.focus({ preventScroll: true });
     }, 0);
   };
   lightboxNext = () => this.setState((s) => ({ lightboxIndex: (s.lightboxIndex + 1) % s.lightboxImages.length }));
@@ -1153,7 +1161,7 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.handleScroll);
     window.removeEventListener('keydown', this.handleKeyDown);
     if (this._observer) this._observer.disconnect();
-    document.body.style.overflow = '';
+    this.lockScroll(false);
     document.body.classList.remove('menu-open');
   }
 
